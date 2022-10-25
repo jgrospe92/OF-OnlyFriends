@@ -1,2 +1,2 @@
 # Workout-app
- A group prioject for our mobile application developement
+ A group Project for our mobile application developement 2 course
