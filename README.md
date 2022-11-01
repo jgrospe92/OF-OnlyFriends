@@ -2,7 +2,7 @@
 - A group Project for our mobile application development 2 course
 
  # Description
-- OnlyStudent or OS is free learning / social media platform where students can post about their learning journey. This platform encourages students to share what they've learned, what they've accomplished and any challenges they've faced. It is in fact inspired by OF but instead of posting explicit content, users posts tutorials, documentations and blogs. Originally 
+- OnlyFriends is a social media platform similar to twitter and onlyFans. Our platform is mainly inspired by OF but instead of posting only explicit content, users posts tutorials, documentations and blogs. The reason why we call it only friends is because a user cannot see another user content without subscribing. This platform encourages creativity and uniqueness.
 
 
 # Features
