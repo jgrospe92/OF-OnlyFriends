@@ -1,4 +1,4 @@
-# OS-OnlyFriends-app
+# OF-OnlyFriends-app
 - A group Project for our mobile application development 2 course
 
  # Description
