@@ -35,15 +35,7 @@
                 android:layout_height="28dp"
                 android:layout_marginStart="60dp"
                 app:srcCompat="@drawable/only_fans_logo" />
-
-            <ImageView
-                android:id="@+id/imageSearch"
-                android:layout_width="wrap_content"
-                android:layout_marginStart="60dp"
-                android:layout_height="28dp"
-                app:srcCompat="@drawable/ic_baseline_search_24" />
-
-
+            
         </LinearLayout>
     </LinearLayout>
 
