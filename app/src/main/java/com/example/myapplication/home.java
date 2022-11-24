@@ -1,13 +1,10 @@
 package com.example.myapplication;
 
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.NavigationUI;
+
 
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -20,6 +17,8 @@ public class home extends AppCompatActivity {
 
     homefragment homefragment = new homefragment();
     searchFragment searchFragment = new searchFragment();
+    NotificationFragmet notificationFragmet = new NotificationFragmet();
+    InboxFragment inboxFragment = new InboxFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +43,12 @@ public class home extends AppCompatActivity {
                     break;
 
                 case R.id.notif:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.parentFragment, notificationFragmet).commit();
                     Toast.makeText(getApplicationContext(), "notif click", Toast.LENGTH_SHORT).show();
                     break;
 
                 case R.id.inbox:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.parentFragment, inboxFragment).commit();
                     Toast.makeText(getApplicationContext(), "notif click", Toast.LENGTH_SHORT).show();
                     break;
 

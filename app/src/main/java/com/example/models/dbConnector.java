@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class dbConnector extends SQLiteOpenHelper {
 
     private static dbConnector sInstance;
+    private Context sContext;
 
     public static final String DB_NAME = "Test.db";
     public static final int DB_VERSION = 1;
@@ -20,6 +21,7 @@ public class dbConnector extends SQLiteOpenHelper {
 
     private dbConnector(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
+        this.sContext = context;
     }
 
     @Override

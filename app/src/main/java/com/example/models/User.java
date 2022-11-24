@@ -1,5 +1,7 @@
 package com.example.models;
 
+import android.content.ContentValues;
+import android.database.ContentObservable;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.Observable;
@@ -42,9 +44,17 @@ public class User extends Observable {
         this.email = email;
     }
 
-    public boolean create(User user) {
+    public boolean insert(User user) {
         SQLiteDatabase sql = con.getWritableDatabase();
-
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("username", user.getUsername());
+        contentValues.put("password", user.getPassword());
+        contentValues.put("email", user.getEmail());
+        long success = sql.insert("user", null, contentValues);
+        sql.close();
+        if (success < 0) {
+            return  false;
+        }
         return false;
     }
 }
