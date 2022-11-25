@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.HashMap;
 
 public class register extends AppCompatActivity {
 
@@ -22,7 +21,6 @@ public class register extends AppCompatActivity {
     EditText et_username, et_email, et_password, et_confirmPassword;
     Button btn_save, btn_cancel;
 
-    HashMap<String, String> data = new HashMap<>();
 
     String username = "";
     String password = "";
@@ -59,8 +57,13 @@ public class register extends AppCompatActivity {
         }
 
         User user = new User(username, password, email, this);
+
         if (user.insert(user)) {
             Toast.makeText(getApplicationContext(), "User added", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, createProfile.class);
+            finish();
+            intent.putExtra("USER_ID", String.valueOf(user.getLastInsert()));
+            startActivity(intent);
         } else {
             Toast.makeText(getApplicationContext(), "ERROR!: " + user.getUsername() + " already exists!", Toast.LENGTH_SHORT).show();
         }
