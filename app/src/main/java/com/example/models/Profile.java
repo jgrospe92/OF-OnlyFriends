@@ -12,22 +12,48 @@ public class Profile extends Observable {
 
     dbConnector con;
 
-    private String profileName, fname, lname, followerCount,
-            subscriberCount, wallet , userID;
+    private String profileName, fname, lname, followerCount, followingCount,
+            subscriberCount, subscribedCount, wallet , imageLink, userID;
 
     public Profile(Context context){
         con = dbConnector.getInstance(context);
     }
 
     public Profile(String profileName, String fname, String lname,
-                   String followerCount, String subscriberCount, String wallet, String userID) {
+                   String followerCount, String followingCount, String subscriberCount, String subscribedCount,  String wallet, String imageLink, String userID) {
         this.profileName = profileName;
         this.fname = fname;
         this.lname = lname;
         this.followerCount = followerCount;
+        this.followingCount = followingCount;
         this.subscriberCount = subscriberCount;
+        this.subscribedCount = subscribedCount;
         this.wallet = wallet;
+        this.imageLink = imageLink;
         this.userID = userID;
+    }
+
+    public String getFollowingCount() {
+        return followingCount;
+    }
+
+    public void setFollowingCount(String followingCount) {
+        this.followingCount = followingCount;
+    }
+
+    public String getSubscribedCount() {
+        return subscribedCount;
+    }
+
+    public void setSubscribedCount(String subscribedCount) {
+        this.subscribedCount = subscribedCount;
+    }
+
+    public  String getImageLink(){
+        return  imageLink;
+    }
+    public void setImageLink(String imageLink){
+        this.imageLink = imageLink;
     }
 
     public String getProfileName() {
@@ -108,8 +134,11 @@ public class Profile extends Observable {
         contentValues.put("fname", profile.getFname());
         contentValues.put("lname", profile.getLname());
         contentValues.put("followerCount", profile.getFollowerCount());
+        contentValues.put("followingCount", profile.getFollowingCount());
         contentValues.put("subscriberCount", profile.getSubscriberCount());
+        contentValues.put("subscriberCount", profile.getSubscribedCount());
         contentValues.put("wallet", profile.getWallet());
+        contentValues.put("imageLink", profile.getImageLink());
         contentValues.put("userID", profile.getUserID());
         try {
             long success = sql.insertOrThrow("profile", null, contentValues);
@@ -144,16 +173,20 @@ public class Profile extends Observable {
             String fname = c.getString(2);
             String lname = c.getString(3);
             String followerCount = c.getString(4);
-            String subscriberCount = c.getString(5);
-            String wallet = c.getString(6);
-            String userID = c.getString(7);
+            String followingCount = c.getString(5);
+            String subscriberCount = c.getString(6);
+            String subscribedCount = c.getString(7);
+            String wallet = c.getString(8);
+            String imageLink = c.getString(9);
+            String userID = c.getString(10);
+            return new Profile(profileName, fname, lname, followerCount, followingCount, subscriberCount, subscribedCount, wallet, imageLink, userID);
         } catch (Exception e) {
             Log.e("ERROR MESSAGE: ", e.getMessage());
-            return null;
+
         } finally {
             sql.close();
         }
-        return new Profile(profileName, fname, lname, followerCount, subscriberCount, wallet, userID);
+        return null;
     }
 
 }

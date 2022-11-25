@@ -16,6 +16,7 @@ public class User extends Observable {
     private String username;
     private String password;
     private String email;
+    private String userID;
 
 
 
@@ -44,6 +45,8 @@ public class User extends Observable {
         return  lastInsertedID;
     }
 
+    public void setUserID(String userID){this.userID = userID;}
+    public  String getUserID(){return this.userID;};
 
     public String getUsername() {
         return username;
@@ -119,13 +122,14 @@ public class User extends Observable {
             String username = c.getString(1);
             String password = c.getString(2);
             String email = c.getString(3);
+            return new User(username, password, email);
         } catch (Exception e) {
             Log.e("ERROR MESSAGE: ", e.getMessage());
-            return null;
+
         } finally {
             sql.close();
         }
-        return new User(username, password, email);
+        return null;
     }
 
     public  User getUserByUsername(String user) {
@@ -133,10 +137,13 @@ public class User extends Observable {
         try {
             Cursor c =  sql.rawQuery("SELECT * FROM user WHERE username =?", new String[] {user});
             c.moveToFirst();
+            String userID = c.getString(0);
             String username = c.getString(1);
             String password = c.getString(2);
             String email = c.getString(3);
-            return new User(username, password, email);
+            User getUser = new User(username, password, email);
+            getUser.setUserID(userID);
+            return  getUser;
         } catch (Exception e) {
             Log.e("ERROR MESSAGE: ", e.getMessage());
             return null;
