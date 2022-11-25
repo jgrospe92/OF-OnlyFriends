@@ -35,7 +35,7 @@
                 android:layout_height="28dp"
                 android:layout_marginStart="60dp"
                 app:srcCompat="@drawable/only_fans_logo" />
-            
+
         </LinearLayout>
     </LinearLayout>
 

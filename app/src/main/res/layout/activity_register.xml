@@ -109,19 +109,21 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_save"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/layout_blue_btn"
-        android:layout_gravity="center"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
+        android:background="@drawable/layout_blue_btn"
+        android:onClick="saveUser"
         android:text="SAVE" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_cancel"
-        android:background="@drawable/layout_orange_btn"
-        android:layout_gravity="center"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/layout_orange_btn"
+        android:onClick="cancelUser"
         android:text="CANCEL" />
 </LinearLayout>

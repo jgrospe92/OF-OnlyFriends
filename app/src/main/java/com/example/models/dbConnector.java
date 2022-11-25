@@ -1,8 +1,10 @@
 package com.example.models;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class dbConnector extends SQLiteOpenHelper {
 
@@ -27,12 +29,14 @@ public class dbConnector extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("PRAGMA foreign_keys = ON");
-        db.execSQL("create table user (userID integer primary key autoincrement, username varchar, password varchar, email varchar)");
-        db.execSQL("create table profile (profileID iteger primary key autoincrement, profileName varchar, fname varcahr, lname varchar," +
-                " followerCount varchar default '0', following count default '0',wallet varchar, foreign key (userID) references user (userID) on delete cascade)");
-        db.execSQL("create table subscription (subID integer primary key autoincrement, subscribeTo integer, isUnluck integer, foreign key (profileID) references profile (profileID) on delete cascade )");
-        db.execSQL("create table post (postID integer primary key autoincrement, caption text, datePosted text, likes varchar default '0', favorites varchar default '0'," +
-                "foreign key (profileID) references profile (profileID) on delete cascade)");
+//      USER TABLE
+        db.execSQL("create table user (userID integer primary key autoincrement, username varchar UNIQUE, password varchar, email varchar)");
+//      PROFILE TABLE
+        db.execSQL("create table profile (profileID integer primary key autoincrement, profileName varchar, fname varchar, lname varchar, followerCount varchar, subscriberCount varchar , wallet varchar, userID integer, foreign key (userID) references user (userID) on delete cascade)");
+//      SUBSCRIPTION TABLE
+        db.execSQL("create table subscription (subID integer primary key autoincrement, subscribeTo integer, isUnluck integer, profileID integer , foreign key (profileID) references profile (profileID) on delete cascade )");
+//      POST TABLE
+        db.execSQL("create table post (postID integer primary key autoincrement, caption text, datePosted text, likes varchar default '0', favorites varchar default '0', profileID integer, foreign key (profileID) references profile (profileID) on delete cascade)");
 
     }
 
@@ -45,4 +49,7 @@ public class dbConnector extends SQLiteOpenHelper {
         onCreate(db);
 
     }
+
+    // USER
+
 }
