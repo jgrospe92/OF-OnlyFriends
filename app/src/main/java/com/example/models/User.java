@@ -17,6 +17,10 @@ public class User extends Observable {
     private String password;
     private String email;
 
+
+
+    private long lastInsertedID;
+
     dbConnector con;
 
     public User(String username, String password, String email, Context context) {
@@ -34,6 +38,10 @@ public class User extends Observable {
 
     public  User(Context context) {
         con = dbConnector.getInstance(context);
+    }
+
+    public long getLastInsert(){
+        return  lastInsertedID;
     }
 
 
@@ -79,7 +87,7 @@ public class User extends Observable {
         contentValues.put("password", user.getPassword());
         contentValues.put("email", user.getEmail());
         try {
-            long success = sql.insertOrThrow("user", null, contentValues);
+            lastInsertedID = sql.insertOrThrow("user", null, contentValues);
             return true;
         } catch (android.database.SQLException e){
             Log.e("DATA ERROR", e.getMessage());
@@ -106,7 +114,7 @@ public class User extends Observable {
     public User get(String userID){
         SQLiteDatabase sql = con.getWritableDatabase();
         try {
-            Cursor c =  sql.rawQuery("SELECT * FROM user WHERE userID = ?", new String[] {userID});
+            Cursor c =  sql.rawQuery("SELECT * FROM user WHERE userID =?", new String[] {userID});
             c.moveToFirst();
             String username = c.getString(1);
             String password = c.getString(2);
@@ -118,5 +126,40 @@ public class User extends Observable {
             sql.close();
         }
         return new User(username, password, email);
+    }
+
+    public  User getUserByUsername(String user) {
+        SQLiteDatabase sql = con.getWritableDatabase();
+        try {
+            Cursor c =  sql.rawQuery("SELECT * FROM user WHERE username =?", new String[] {user});
+            c.moveToFirst();
+            String username = c.getString(1);
+            String password = c.getString(2);
+            String email = c.getString(3);
+            return new User(username, password, email);
+        } catch (Exception e) {
+            Log.e("ERROR MESSAGE: ", e.getMessage());
+            return null;
+        } finally {
+            sql.close();
+        }
+    }
+
+    @SuppressLint("Range")
+    public String verifyPassword(String username) {
+        SQLiteDatabase sql = con.getWritableDatabase();
+        try {
+            String query = "SELECT password FROM user WHERE username=?";
+            Cursor c = sql.rawQuery(query, new String[]{username});
+            if (c.moveToFirst()){
+                return c.getString(c.getColumnIndex("password"));
+            }
+        } catch (Exception e) {
+            Log.e("ERROR MESSAGE: ", e.getMessage());
+        }
+        finally {
+            sql.close();
+        }
+        return null;
     }
 }

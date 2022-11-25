@@ -36,7 +36,7 @@ public class dbConnector extends SQLiteOpenHelper {
 //      SUBSCRIPTION TABLE
         db.execSQL("create table subscription (subID integer primary key autoincrement, subscribeTo integer, isUnluck integer, profileID integer , foreign key (profileID) references profile (profileID) on delete cascade )");
 //      POST TABLE
-        db.execSQL("create table post (postID integer primary key autoincrement, caption text, datePosted text, likes varchar default '0', favorites varchar default '0', profileID integer, foreign key (profileID) references profile (profileID) on delete cascade)");
+        db.execSQL("create table post (postID integer primary key autoincrement, caption text, datePosted text, likes varchar , favorites varchar , profileID integer, foreign key (profileID) references profile (profileID) on delete cascade)");
 
     }
 
