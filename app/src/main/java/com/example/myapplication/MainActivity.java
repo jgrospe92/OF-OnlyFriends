@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 String pass = userHelper.verifyPassword(username);
                 if (password.equals(pass)) {
                     Intent intent  = new Intent(getApplicationContext(), home.class);
+                    intent.putExtra("USERNAME", username);
                     startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), "Invalid Credentials", Toast.LENGTH_LONG).show();

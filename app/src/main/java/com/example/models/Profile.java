@@ -13,21 +13,29 @@ public class Profile extends Observable {
     dbConnector con;
 
     private String profileName, fname, lname, followerCount,
-            subscriberCount, wallet , userID;
+            subscriberCount, wallet , imageLink, userID;
 
     public Profile(Context context){
         con = dbConnector.getInstance(context);
     }
 
     public Profile(String profileName, String fname, String lname,
-                   String followerCount, String subscriberCount, String wallet, String userID) {
+                   String followerCount, String subscriberCount, String wallet, String imageLink, String userID) {
         this.profileName = profileName;
         this.fname = fname;
         this.lname = lname;
         this.followerCount = followerCount;
         this.subscriberCount = subscriberCount;
         this.wallet = wallet;
+        this.imageLink = imageLink;
         this.userID = userID;
+    }
+
+    public  String getImageLink(){
+        return  imageLink;
+    }
+    public void setImageLink(String imageLink){
+        this.imageLink = imageLink;
     }
 
     public String getProfileName() {
@@ -110,6 +118,7 @@ public class Profile extends Observable {
         contentValues.put("followerCount", profile.getFollowerCount());
         contentValues.put("subscriberCount", profile.getSubscriberCount());
         contentValues.put("wallet", profile.getWallet());
+        contentValues.put("imageLink", profile.getImageLink());
         contentValues.put("userID", profile.getUserID());
         try {
             long success = sql.insertOrThrow("profile", null, contentValues);
@@ -146,14 +155,16 @@ public class Profile extends Observable {
             String followerCount = c.getString(4);
             String subscriberCount = c.getString(5);
             String wallet = c.getString(6);
-            String userID = c.getString(7);
+            String imageLink = c.getString(7);
+            String userID = c.getString(8);
+            return new Profile(profileName, fname, lname, followerCount, subscriberCount, wallet, imageLink, userID);
         } catch (Exception e) {
             Log.e("ERROR MESSAGE: ", e.getMessage());
-            return null;
+
         } finally {
             sql.close();
         }
-        return new Profile(profileName, fname, lname, followerCount, subscriberCount, wallet, userID);
+        return null;
     }
 
 }

@@ -10,7 +10,7 @@
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="89dp"
         app:srcCompat="@drawable/only_fans_logo" />
 
     <TextView
@@ -100,15 +100,37 @@
         android:inputType="text"
         android:layout_marginBottom="15dp"
         android:hint="Enter amount" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Image URL"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/et_imageLink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/layout_bg"
+        android:drawableStart="@drawable/ic_baseline_person_outline_24"
+        android:drawablePadding="10dp"
+        android:padding="10dp"
+        android:ems="10"
+        android:inputType="text"
+        android:layout_marginBottom="5dp"
+        android:hint="Enter amount" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_create"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/layout_blue_btn"
-        android:layout_gravity="center"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
+        android:background="@drawable/layout_blue_btn"
         android:onClick="create"
         android:text="CREATE" />
 

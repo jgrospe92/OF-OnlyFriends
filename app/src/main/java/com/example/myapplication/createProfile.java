@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 public class createProfile extends AppCompatActivity {
 
-    EditText et_profileName, et_fname, et_lname, et_amount;
+    EditText et_profileName, et_fname, et_lname, et_amount, et_imageLink;
     String lastInsertUserID;
 
     User userHelper;
@@ -30,6 +30,7 @@ public class createProfile extends AppCompatActivity {
         et_fname = findViewById(R.id.et_fname);
         et_lname = findViewById(R.id.et_lname);
         et_amount = findViewById(R.id.et_amount);
+        et_imageLink = findViewById(R.id.et_imageLink);
         lastInsertUserID = getIntent().getStringExtra("USER_ID");
 
         userHelper = new User(this);
@@ -41,6 +42,7 @@ public class createProfile extends AppCompatActivity {
         String fName = et_fname.getText().toString();
         String lName = et_lname.getText().toString();
         String amount = et_amount.getText().toString();
+        String imageLink = et_imageLink.getText().toString();
 
         Profile profile = new Profile(this);
         profile.setProfileName(profileName);
@@ -50,6 +52,7 @@ public class createProfile extends AppCompatActivity {
         profile.setUserID(lastInsertUserID);
         profile.setSubscriberCount("0");
         profile.setFollowerCount("0");
+        profile.setImageLink(imageLink);
 
         if (profile.insert(profile)) {
             Toast.makeText(getApplicationContext(), "Profile Created", Toast.LENGTH_SHORT).show();
