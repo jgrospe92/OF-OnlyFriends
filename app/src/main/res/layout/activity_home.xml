@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,12 +12,10 @@
     tools:context=".home"
     android:orientation="vertical">
 
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,28 +26,59 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profileImage"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/account" />
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:clickable="true"
+                android:onClick="openDrawer"
+                android:src="@drawable/account"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <ImageView
                 android:id="@+id/imageView5"
                 android:layout_width="200dp"
-                android:layout_height="28dp"
+                android:layout_height="40dp"
                 android:layout_marginStart="60dp"
                 app:srcCompat="@drawable/only_fans_logo" />
 
         </LinearLayout>
     </LinearLayout>
 
-    <FrameLayout
-        android:id="@+id/parentFragment"
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/my_drawer_layout"
         android:layout_width="match_parent"
-        android:layout_height="625dp"/>
+        android:layout_height="610dp"
+        tools:context=".home">
+
+
+        <!-- this the navigation view which draws and shows the navigation drawer -->
+        <!-- include the menu created in the menu folder -->
+        <com.google.android.material.navigation.NavigationView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:headerLayout="@layout/nav_header"
+            android:background="@color/light_brown"
+            app:menu="@menu/navigation_menu" />
+
+        <FrameLayout
+            android:id="@+id/parentFragment"
+            android:layout_width="match_parent"
+            android:layout_height="625dp">
+
+            <TextView
+                android:id="@+id/welcomeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textSize="20sp"
+
+                android:textStyle="bold" />
+        </FrameLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>
 
 
 
-
+    <!--    //Drawer MENU -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         app:menu="@menu/bottom_nav_menu"
@@ -61,5 +92,6 @@
 
         </FrameLayout>
     </com.google.android.material.bottomnavigation.BottomNavigationView>
+
 
 </LinearLayout>
