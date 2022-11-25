@@ -24,6 +24,7 @@ import com.bumptech.glide.load.model.LazyHeaders;
 import com.example.models.Profile;
 import com.example.models.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -36,6 +37,7 @@ public class home extends AppCompatActivity {
     TextView welcomeText;
 
     DrawerLayout my_drawer_layout;
+    NavigationView drawerNav;
     ActionBarDrawerToggle actionBarDrawerToggle;
 
     BottomNavigationView bottomNavigationView;
@@ -57,7 +59,22 @@ public class home extends AppCompatActivity {
 
         welcomeText = findViewById(R.id.welcomeText);
 
-        my_drawer_layout =findViewById(R.id.my_drawer_layout);
+        my_drawer_layout = findViewById(R.id.my_drawer_layout);
+        drawerNav = findViewById(R.id.nav_drawer);
+        drawerNav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                my_drawer_layout.closeDrawer(GravityCompat.START);
+                switch (id) {
+                    case R.id.nav_profile:
+                        Toast.makeText(getApplicationContext(), "Profile clicked", Toast.LENGTH_SHORT).show();break;
+                    default:
+                        return  true;
+                }
+                return true;
+            }
+        });
 
 
         String username = getIntent().getStringExtra("USERNAME");
@@ -100,6 +117,7 @@ public class home extends AppCompatActivity {
 
         // DRAWER listener
 
+
     }
 
     @Override
@@ -128,9 +146,9 @@ public class home extends AppCompatActivity {
 
     public void openDrawer(View view) {
         if (!my_drawer_layout.isDrawerOpen(Gravity.LEFT)) {
-            my_drawer_layout.openDrawer(Gravity.LEFT);
+            my_drawer_layout.openDrawer(GravityCompat.START);
         } else {
-            my_drawer_layout.closeDrawer(Gravity.LEFT);
+            my_drawer_layout.closeDrawer(GravityCompat.START);
         }
     }
 }
