@@ -136,7 +136,7 @@ public class Profile extends Observable {
         contentValues.put("followerCount", profile.getFollowerCount());
         contentValues.put("followingCount", profile.getFollowingCount());
         contentValues.put("subscriberCount", profile.getSubscriberCount());
-        contentValues.put("subscriberCount", profile.getSubscribedCount());
+        contentValues.put("subscribedCount", profile.getSubscribedCount());
         contentValues.put("wallet", profile.getWallet());
         contentValues.put("imageLink", profile.getImageLink());
         contentValues.put("userID", profile.getUserID());

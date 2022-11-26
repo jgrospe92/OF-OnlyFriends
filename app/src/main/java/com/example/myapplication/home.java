@@ -50,17 +50,20 @@ public class home extends AppCompatActivity {
     Profile profileHelper;
     User userHelper;
 
+    // DRAWER ITEMS
+    TextView navFname, navProfileName, navSubscribedNum, navSubscriberNum,
+            navFollowingNum, navFollowerNum;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         userHelper = new User(this);
         profileHelper = new Profile(this);
-
         welcomeText = findViewById(R.id.welcomeText);
-
+        // DRAWER STARTS
         my_drawer_layout = findViewById(R.id.my_drawer_layout);
-        drawerNav = findViewById(R.id.nav_drawer);
+        drawerNav = (NavigationView) findViewById(R.id.nav_drawer);
         drawerNav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -75,15 +78,14 @@ public class home extends AppCompatActivity {
                 return true;
             }
         });
-
+        // DRAWER ENDS
 
         String username = getIntent().getStringExtra("USERNAME");
         User user = userHelper.getUserByUsername(username);
         Profile profile = profileHelper.get(user.getUserID());
-
         profileImage = findViewById(R.id.profileImage);
-
         loadImage(profile.getImageLink(), this, profileImage);
+        initProfile(profile);
         welcomeText.setText("Welcome " + profile.getFname().toLowerCase());
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
@@ -150,5 +152,34 @@ public class home extends AppCompatActivity {
         } else {
             my_drawer_layout.closeDrawer(GravityCompat.START);
         }
+    }
+
+    private String capitalizeFirstLetter(String str){
+        return str.substring(0, 1).toUpperCase() + str.substring(1);
+    }
+
+    private void initProfile(Profile profile){
+        // NAV DRAWER
+        View headerView = drawerNav.getHeaderView(0);
+        navFname = (TextView) headerView.findViewById(R.id.navFname);
+        navProfileName = (TextView) headerView.findViewById(R.id.navProfileName);
+        navFollowerNum = (TextView) headerView.findViewById(R.id.followerNum);
+        navFollowingNum = (TextView) headerView.findViewById(R.id.followingNum);
+        navSubscriberNum = (TextView) headerView.findViewById(R.id.subscriberNum);
+        navSubscribedNum = (TextView) headerView.findViewById(R.id.subscribedNum);
+
+        String firstName = capitalizeFirstLetter(profile.getFname());
+        String profileName = "@" + profile.getProfileName();
+        String followerNum = profile.getFollowerCount();
+        String followingNum = profile.getFollowingCount();
+        String subscriberNum = profile.getSubscriberCount();
+        String subscribedNum = profile.getSubscribedCount();
+
+        navFname.setText(firstName);
+        navProfileName.setText(profileName);
+        navFollowerNum.setText(followerNum);
+        navFollowingNum.setText(followingNum);
+        navSubscriberNum.setText(subscriberNum);
+        navSubscribedNum.setText(subscribedNum);
     }
 }
