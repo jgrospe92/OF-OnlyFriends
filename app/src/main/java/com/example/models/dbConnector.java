@@ -32,7 +32,7 @@ public class dbConnector extends SQLiteOpenHelper {
 //      USER TABLE
         db.execSQL("create table user (userID integer primary key autoincrement, username varchar UNIQUE, password varchar, email varchar)");
 //      PROFILE TABLE
-        db.execSQL("create table profile (profileID integer primary key autoincrement, profileName varchar, fname varchar, lname varchar, followerCount varchar, followingCount varchar, subscriberCount varchar , subscibedCount varchar, wallet varchar, imageLink varchar, userID integer, foreign key (userID) references user (userID) on delete cascade)");
+        db.execSQL("create table profile (profileID integer primary key autoincrement, profileName varchar, fname varchar, lname varchar, followerCount varchar, followingCount varchar, subscriberCount varchar , subscribedCount varchar, wallet varchar, imageLink varchar, userID integer, foreign key (userID) references user (userID) on delete cascade)");
 //      SUBSCRIPTION TABLE
         db.execSQL("create table subscription (subID integer primary key autoincrement, subscribeTo integer, isUnluck integer, profileID integer , foreign key (profileID) references profile (profileID) on delete cascade )");
 //      POST TABLE

@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context=".home"
     android:orientation="vertical">
 
@@ -49,11 +44,8 @@
         android:layout_height="610dp"
         tools:context=".home">
 
-
         <!-- this the navigation view which draws and shows the navigation drawer -->
         <!-- include the menu created in the menu folder -->
-
-
         <FrameLayout
             android:id="@+id/parentFragment"
             android:layout_width="match_parent"
@@ -76,9 +68,8 @@
             app:headerLayout="@layout/nav_header"
             android:background="@color/light_brown"
             app:menu="@menu/navigation_menu" />
+
     </androidx.drawerlayout.widget.DrawerLayout>
-
-
 
     <!--    //Drawer MENU -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
