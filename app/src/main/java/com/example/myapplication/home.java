@@ -24,6 +24,7 @@ import com.bumptech.glide.load.model.LazyHeaders;
 import com.example.models.Profile;
 import com.example.models.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 
@@ -33,6 +34,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class home extends AppCompatActivity {
 
     CircleImageView profileImage;
+    FloatingActionButton btn_fab;
 
     TextView welcomeText;
 
@@ -76,6 +78,14 @@ public class home extends AppCompatActivity {
                         return  true;
                 }
                 return true;
+            }
+        });
+        // FLOATING ACTION BUTTON
+        btn_fab = findViewById(R.id.btn_fab);
+        btn_fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Fab click", Toast.LENGTH_SHORT).show();
             }
         });
         // DRAWER ENDS
