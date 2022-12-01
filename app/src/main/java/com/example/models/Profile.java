@@ -12,7 +12,7 @@ public class Profile extends Observable {
 
     dbConnector con;
 
-    private String profileName, fname, lname, followerCount, followingCount,
+    private String profileID, profileName, fname, lname, followerCount, followingCount,
             subscriberCount, subscribedCount, wallet , imageLink, userID;
 
     public Profile(Context context){
@@ -110,6 +110,14 @@ public class Profile extends Observable {
 
     public void setUserID(String userID) {
         this.userID = userID;
+    }
+
+    public String getProfileID() {
+        return profileID;
+    }
+
+    public void setProfileID(String profileID) {
+        this.profileID = profileID;
     }
 
     @Override

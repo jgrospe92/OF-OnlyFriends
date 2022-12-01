@@ -40,7 +40,7 @@ public class register extends AppCompatActivity {
         et_confirmPassword = findViewById(R.id.et_confirmPassword);
 
         btn_save = findViewById(R.id.btn_save);
-        btn_cancel =findViewById(R.id.btn_cancel);
+        btn_cancel = findViewById(R.id.btn_cancel);
 
 
     }
