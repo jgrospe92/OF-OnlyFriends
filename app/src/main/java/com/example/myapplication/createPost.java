@@ -63,7 +63,7 @@ dbConnector db;
              Date calTime = Calendar.getInstance().getTime();
              SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-DD-yy", Locale.getDefault());
              String formattedDate = simpleDateFormat.format(calTime);
-             Post post = new Post(caption, formattedDate, "0", "0");
+             //Post post = new Post(caption, formattedDate, "0", "0");
 
 
 
