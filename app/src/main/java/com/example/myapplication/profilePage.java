@@ -3,7 +3,9 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -65,5 +67,11 @@ public class profilePage extends AppCompatActivity {
                 .error(R.drawable.ic_launcher_background)
                 .centerCrop()
                 .into(image);
+    }
+
+    public void editProfile(View view) {
+        Intent i = new Intent(getApplicationContext(), EditProfile.class);
+        i.putExtra("USERNAME", username);
+        startActivity(i);
     }
 }

@@ -26,6 +26,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/profileImg"
         app:layout_constraintTop_toTopOf="parent"
+        android:onClick="editProfile"
         app:srcCompat="@drawable/editprofilebutton" />
 
     <TextView

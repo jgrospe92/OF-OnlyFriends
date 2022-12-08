@@ -33,6 +33,16 @@ public class Profile extends Observable {
         this.userID = userID;
     }
 
+    //TODO
+    public Profile(String profileName, String fname, String lname, String wallet, String imageLink, String userID){
+        this.profileName = profileName;
+        this.fname = fname;
+        this.lname = lname;
+        this.wallet = wallet;
+        this.imageLink = imageLink;
+        this.userID = userID;
+    }
+
     public String getFollowingCount() {
         return followingCount;
     }
@@ -195,6 +205,17 @@ public class Profile extends Observable {
             sql.close();
         }
         return null;
+    }
+
+    public boolean update(Profile profile, String profileName, String fname, String lname, String wallet, String userID){
+        SQLiteDatabase db = con.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("profileName", profileName);
+        contentValues.put("fname", fname);
+        contentValues.put("lname", lname);
+        contentValues.put("wallet", wallet);
+        db.update("Profile",contentValues, " userID = ? ", new String[] {userID});
+        return true;
     }
 
 }
