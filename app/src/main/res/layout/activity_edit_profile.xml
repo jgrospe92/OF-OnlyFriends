@@ -44,8 +44,8 @@
 
     <EditText
         android:id="@+id/lastNameEditText"
-        android:layout_width="363dp"
-        android:layout_height="43dp"
+        android:layout_width="366dp"
+        android:layout_height="41dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/layout_bg"
         android:ems="10"
