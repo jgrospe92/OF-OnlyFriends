@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -46,6 +47,7 @@ public class User extends Observable {
     }
 
     public void setUserID(String userID){this.userID = userID;}
+
     public  String getUserID(){return this.userID;};
 
     public String getUsername() {
@@ -84,6 +86,7 @@ public class User extends Observable {
 //    NOTE: THIS SECTION IS FOR DATABASE CALLS
 
     public boolean insert(User user) {
+//       INSERT NEW USER INTO THE user table
         SQLiteDatabase sql = con.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("username", user.getUsername());
@@ -102,6 +105,7 @@ public class User extends Observable {
     }
 
     public boolean delete(String userID) {
+//       DELETE USER USING THE USER ID
         SQLiteDatabase sql = con.getWritableDatabase();
         int res = sql.delete("user", "userID = ?", new String [] {userID});
         if (res < 0) {
@@ -115,6 +119,7 @@ public class User extends Observable {
 
 
     public User get(String userID){
+//        GET USER USING THE USER ID AND RETURNS A USER Object
         SQLiteDatabase sql = con.getWritableDatabase();
         try {
             Cursor c =  sql.rawQuery("SELECT * FROM user WHERE userID =?", new String[] {userID});
@@ -133,6 +138,7 @@ public class User extends Observable {
     }
 
     public  User getUserByUsername(String user) {
+//        RETURNS USER OBJECT USING THE USERNAME
         SQLiteDatabase sql = con.getWritableDatabase();
         try {
             Cursor c =  sql.rawQuery("SELECT * FROM user WHERE username =?", new String[] {user});
@@ -154,6 +160,7 @@ public class User extends Observable {
 
     @SuppressLint("Range")
     public String verifyPassword(String username) {
+//      CHECK IF THE PASSWORD MATCHES WITH THE USER SAVED IN THE DB
         SQLiteDatabase sql = con.getWritableDatabase();
         try {
             String query = "SELECT password FROM user WHERE username=?";
