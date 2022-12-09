@@ -126,11 +126,11 @@ public class Profile extends Observable {
             return true;
         } catch (android.database.SQLException e){
             Log.e("DATA ERROR", e.getMessage());
-            return  false;
+
         } finally {
             sql.close();;
         }
-
+        return  false;
     }
 
     public boolean delete(String profileID) {
@@ -145,11 +145,11 @@ public class Profile extends Observable {
 
     }
 
-    public Profile get(String fkID){
+    public Profile get(String userid){
         SQLiteDatabase sql = con.getWritableDatabase();
         try {
 
-            Cursor c =  sql.rawQuery("SELECT * FROM profile INNER JOIN user ON profile.userID = ?", new String[] {fkID});
+            Cursor c =  sql.rawQuery("SELECT * FROM profile INNER JOIN user ON profile.userID = ?", new String[] {userid});
             c.moveToFirst();
             int profileID = c.getInt(0);
             String profileName = c.getString(1);

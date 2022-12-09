@@ -11,20 +11,21 @@ import java.util.Observable;
 
 public class Post extends Observable {
 
-      //  db.execSQL("create table post (postID integer primary key autoincrement, caption text, datePosted text, likes integer , favorites integer , imageURL varchar, profileID integer, foreign key (profileID) references profile (profileID) on delete cascade)");
 
-     private String postID;
-     private String caption;
-     private String datePosted;
-     private int likes;
-     private int favorites;
-     private String imageURL;
-     private String profileID;
-     dbConnector con;
+    private String postID;
+    private String caption;
+    private String datePosted;
+    private int likes;
+    private int favorites;
+    private String imageURL;
+    private String profileID;
+    dbConnector con;
 
     // CONSTRUCTORS
     // CONSTRUCTOR FOR CREATING POST OBJECT
-    public Post(){}
+    public Post() {
+    }
+
     public Post(String caption, String datePosted, int likes, int favorites, String imageURL, String profileID) {
         this.caption = caption;
         this.datePosted = datePosted;
@@ -35,12 +36,9 @@ public class Post extends Observable {
     }
 
     // HELPER CLASS
-    public Post(Context context){
+    public Post(Context context) {
         con = dbConnector.getInstance(context);
     }
-
-
-
 
 
     public String getCaption() {
@@ -102,8 +100,8 @@ public class Post extends Observable {
     // CRUD OPERATIONS
 
 
-   // INSERTING POST OBJECT TO THE DB
-    public boolean insert(Post post, String profileID){
+    // INSERTING POST OBJECT TO THE DB
+    public boolean insert(Post post, String profileID) {
         SQLiteDatabase sql = con.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("caption", post.getCaption());
@@ -115,23 +113,53 @@ public class Post extends Observable {
         try {
             long success = sql.insertOrThrow("post", null, contentValues);
             return true;
-        } catch (android.database.SQLException e){
+        } catch (android.database.SQLException e) {
             Log.e("DATA ERROR", e.getMessage());
-            return  false;
+            return false;
         } finally {
-            sql.close();;
+            sql.close();
+            ;
         }
     }
 
-    // SEARCH POST BY KEYWORD(s); returns an arrayList of type Post
-    public ArrayList<Post> searchByKeyWord(String word){
+    // GET ALL POST
+    public ArrayList<Post> getAllPosts() {
         SQLiteDatabase sql = con.getWritableDatabase();
         ArrayList<Post> posts = new ArrayList<>();
-        if (word.isEmpty()){return  null; }
+        // opens a cursor
+        Cursor c = sql.rawQuery("SELECT * FROM post", null);
+        if (c.moveToFirst()) {
+            do {
+                Post p = new Post();
+                p.setPostID(c.getString(0)); // postID
+                p.setCaption(c.getString(1)); // captionID
+                p.setDatePosted(c.getString(2)); // datePosted
+                p.setLikes(c.getInt(3)); // likes
+                p.setFavorites(c.getInt(4)); // favorites
+                p.setImageURL(c.getString(5)); // imageURL
+                p.setProfileID(c.getString(6));
+                posts.add(p);
+            } while (c.moveToFirst());
+            c.close(); // close the cursor
+            sql.close();
+            return posts;
+        }
+        c.close(); // close the cursor
+        sql.close();
+        return null;
+    }
+
+    // SEARCH POST BY KEYWORD(s); returns an arrayList of type Post
+    public ArrayList<Post> searchByKeyWord(String word) {
+        SQLiteDatabase sql = con.getWritableDatabase();
+        ArrayList<Post> posts = new ArrayList<>();
+        if (word.isEmpty()) {
+            return null;
+        }
         try {
             // opens a cursor
-            Cursor c =  sql.rawQuery("SELECT * FROM post WHERE caption like ? ", new String[] {"%"+word+"%"});
-            while(c.moveToFirst()){
+            Cursor c = sql.rawQuery("SELECT * FROM post WHERE caption like ? ", new String[]{"%" + word + "%"});
+            while (c.moveToFirst()) {
                 Post p = new Post();
                 p.setPostID(c.getString(0)); // postID
                 p.setCaption(c.getString(1)); // captionID
@@ -154,7 +182,7 @@ public class Post extends Observable {
     }
 
     // UPDATE POST
-    public boolean update(Post post){
+    public boolean update(Post post) {
         SQLiteDatabase sql = con.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("caption", post.getCaption());
@@ -162,24 +190,24 @@ public class Post extends Observable {
         contentValues.put("likes", post.getLikes());
         contentValues.put("favorites", post.getFavorites());
 
-        try{
+        try {
             sql.update("post", contentValues, "postID = ?", new String[]{post.getPostID()});
             return true;
 
-        } catch (Exception e){
+        } catch (Exception e) {
             Log.e("ERROR MESSAGE: ", e.getMessage());
         } finally {
             sql.close();
         }
-        return  false;
+        return false;
     }
 
-    public Post get(String postID){
+    public Post get(String postID) {
         SQLiteDatabase sql = con.getWritableDatabase();
         Post post = new Post();
 
         try {
-            Cursor c =  sql.rawQuery("SELECT * FROM post WHERE postID =?", new String[] {postID});
+            Cursor c = sql.rawQuery("SELECT * FROM post WHERE postID =?", new String[]{postID});
             c.moveToFirst();
             Post p = new Post();
             p.setPostID(c.getString(0)); // postID
@@ -189,7 +217,7 @@ public class Post extends Observable {
             p.setFavorites(c.getInt(4)); // favorites
             p.setImageURL(c.getString(5)); // imageURL
             p.setProfileID(c.getString(6));
-            return  p;
+            return p;
         } catch (Exception e) {
             Log.e("ERROR MESSAGE: ", e.getMessage());
 
@@ -200,14 +228,13 @@ public class Post extends Observable {
     }
 
     // DELETE POST
-    public boolean delete(String profileID){
+    public boolean delete(String profileID) {
         SQLiteDatabase sql = con.getWritableDatabase();
         try {
             return sql.delete("post", "postID = ?", new String[]{profileID}) > 0;
-        } catch (Exception e){
+        } catch (Exception e) {
             Log.e("ERROR MESSAGE: ", e.getMessage());
-        }
-        finally {
+        } finally {
             sql.close();
         }
         return false;
