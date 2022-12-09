@@ -73,7 +73,7 @@ public class profilePage extends AppCompatActivity {
 
     public void editProfile(View view) {
         Intent i = new Intent(getApplicationContext(), EditProfile.class);
-        i.putExtra("USERNAME", username);
+        //i.putExtra("USERNAME", username);
         startActivity(i);
     }
 }
