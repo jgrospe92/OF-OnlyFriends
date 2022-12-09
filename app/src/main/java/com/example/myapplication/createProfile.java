@@ -50,10 +50,8 @@ public class createProfile extends AppCompatActivity {
         profile.setLname(lName);
         profile.setWallet(amount);
         profile.setUserID(lastInsertUserID);
-        profile.setSubscriberCount("0");
-        profile.setSubscribedCount("0");
-        profile.setFollowerCount("0");
-        profile.setFollowingCount("0");
+        profile.setIsFollowed(0);
+        profile.setIsSubscribed(0);
         profile.setImageLink(imageLink);
 
         if (profile.insert(profile)) {
