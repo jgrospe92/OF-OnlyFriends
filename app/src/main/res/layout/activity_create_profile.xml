@@ -28,12 +28,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="15dp"
         android:background="@drawable/layout_bg"
+        android:padding="15dp"
         android:ems="10"
-        android:hint="Enter Username"
         android:inputType="textPersonName"
-        android:padding="15dp" />
+        android:layout_marginBottom="15dp"
+        android:hint="Enter Username" />
 
     <TextView
         android:id="@+id/textView4"
@@ -114,19 +114,19 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="5dp"
         android:background="@drawable/layout_bg"
         android:drawableStart="@drawable/ic_baseline_person_outline_24"
         android:drawablePadding="10dp"
+        android:padding="10dp"
         android:ems="10"
-        android:hint="Enter URL"
         android:inputType="text"
-        android:padding="10dp" />
+        android:layout_marginBottom="5dp"
+        android:hint="Enter amount" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_create"
-        android:layout_width="317dp"
-        android:layout_height="25dp"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"

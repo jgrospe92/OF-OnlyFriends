@@ -9,7 +9,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -67,7 +66,6 @@ public class home extends AppCompatActivity {
         // DRAWER STARTS
         my_drawer_layout = findViewById(R.id.my_drawer_layout);
         drawerNav = (NavigationView) findViewById(R.id.nav_drawer);
-
         drawerNav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -91,7 +89,6 @@ public class home extends AppCompatActivity {
             }
         });
         // DRAWER ENDS
-
 
         String username = getIntent().getStringExtra("USERNAME");
         User user = userHelper.getUserByUsername(username);
@@ -129,29 +126,6 @@ public class home extends AppCompatActivity {
             }
             return true;
         });
-
-        drawerNav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-                my_drawer_layout.closeDrawer(GravityCompat.START);
-                switch (id) {
-                    case R.id.nav_profile:
-                        //Toast.makeText(getApplicationContext(), "Profile clicked", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), profilePage.class);
-                        intent.putExtra("USERNAME", username);
-                        startActivity(intent);
-
-                        break;
-                    default:
-                        return  true;
-                }
-                return true;
-            }
-        });
-        // DRAWER ENDS
-
-
 
         // DRAWER listener
 
