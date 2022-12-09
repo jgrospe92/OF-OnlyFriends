@@ -22,6 +22,8 @@ public class profilePage extends AppCompatActivity {
     Profile profileHelper;
     CircleImageView profileImg;
     TextView fnameTxt, profileNameTagTxt, profDescriptionTxt, followingCountTxt, followerCountTxt,linkTxt, joinedDateTxt;
+
+    String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +41,7 @@ public class profilePage extends AppCompatActivity {
 
 
         //Getting the user's name and current image
-        String username = getIntent().getStringExtra("USERNAME");
+        username = getIntent().getStringExtra("USERNAME");
         User user = userHelper.getUserByUsername(username);
         Profile profile = profileHelper.get(user.getUserID());
         profileImg = findViewById(R.id.profileImg);
