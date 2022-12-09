@@ -161,7 +161,7 @@ public class User extends Observable {
         }
     }
 
-    @SuppressLint("Range")
+
     public String verifyPassword(String username) {
 //      CHECK IF THE PASSWORD MATCHES WITH THE USER SAVED IN THE DB
         SQLiteDatabase sql = con.getWritableDatabase();
@@ -169,8 +169,9 @@ public class User extends Observable {
             String query = "SELECT password FROM user WHERE username=?";
             Cursor c = sql.rawQuery(query, new String[]{username});
             if (c.moveToFirst()){
+                String password = c.getString(c.getColumnIndexOrThrow("password"));
                 c.close();
-                return c.getString(c.getColumnIndex("password"));
+                return password;
             }
         } catch (Exception e) {
             Log.e("ERROR MESSAGE: ", e.getMessage());

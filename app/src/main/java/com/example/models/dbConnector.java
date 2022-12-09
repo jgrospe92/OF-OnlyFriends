@@ -63,6 +63,6 @@ public class dbConnector extends SQLiteOpenHelper {
 
     }
 
-    // USER
+  
 
 }
