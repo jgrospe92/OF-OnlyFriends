@@ -174,11 +174,36 @@ public class Post extends Observable {
         return  false;
     }
 
+    public Post get(String postID){
+        SQLiteDatabase sql = con.getWritableDatabase();
+        Post post = new Post();
+
+        try {
+            Cursor c =  sql.rawQuery("SELECT * FROM post WHERE postID =?", new String[] {postID});
+            c.moveToFirst();
+            Post p = new Post();
+            p.setPostID(c.getString(0)); // postID
+            p.setCaption(c.getString(1)); // captionID
+            p.setDatePosted(c.getString(2)); // datePosted
+            p.setLikes(c.getInt(3)); // likes
+            p.setFavorites(c.getInt(4)); // favorites
+            p.setImageURL(c.getString(5)); // imageURL
+            p.setProfileID(c.getString(6));
+            return  p;
+        } catch (Exception e) {
+            Log.e("ERROR MESSAGE: ", e.getMessage());
+
+        } finally {
+            sql.close();
+        }
+        return null;
+    }
+
     // DELETE POST
-    public boolean delete(Post post){
+    public boolean delete(String profileID){
         SQLiteDatabase sql = con.getWritableDatabase();
         try {
-            return sql.delete("post", "postID = ?", new String[]{post.getPostID()}) > 0;
+            return sql.delete("post", "postID = ?", new String[]{profileID}) > 0;
         } catch (Exception e){
             Log.e("ERROR MESSAGE: ", e.getMessage());
         }
