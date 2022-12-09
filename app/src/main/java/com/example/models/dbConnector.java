@@ -32,6 +32,7 @@ public class dbConnector extends SQLiteOpenHelper {
 //      USER TABLE
         db.execSQL("create table user (userID integer primary key autoincrement, username varchar UNIQUE, password varchar, email varchar)");
 //      PROFILE TABLE
+
         db.execSQL("create table profile (profileID integer primary key autoincrement, profileName varchar, fname varchar, lname varchar, isFollowed integer, isSubscribed integer, wallet varchar, imageLink varchar, userID integer, foreign key (userID) references user (userID) on delete cascade)");
 //      FOLLOWER TABLE
         db.execSQL("create table follower (followerID integer primary key autoincrement, dateFollowed text, profileID integer , foreign key (profileID) references profile (profileID) on delete cascade )");
@@ -45,6 +46,7 @@ public class dbConnector extends SQLiteOpenHelper {
         db.execSQL("create table post (postID integer primary key autoincrement, caption text, datePosted text, likes integer , favorites integer , imageURL varchar, profileID integer, foreign key (profileID) references profile (profileID) on delete cascade)");
 //      COMMENT TABLE
         db.execSQL("create table comment (commentID integer primary key autoincrement, caption text, datePosted text, profileID integer, postID integer, foreign key (profileID) references profile (profileID) on delete cascade, foreign key (postID) references post (postID) on delete cascade)");
+
 
     }
 

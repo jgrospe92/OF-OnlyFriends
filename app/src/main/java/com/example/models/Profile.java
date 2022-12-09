@@ -12,6 +12,7 @@ public class Profile extends Observable {
 
     dbConnector con;
 
+
     private String profileID, profileName, fname, lname, wallet, imageLink, userID;
     private int isFollowed, isSubscribed;
 
@@ -33,7 +34,9 @@ public class Profile extends Observable {
         this.userID = userID;
     }
 
+
 //    GETTERS AND SETTERS
+
 
 
     public String getProfileID() {
@@ -108,6 +111,7 @@ public class Profile extends Observable {
         this.userID = userID;
     }
 
+
     // NOTE: DATABASE CALLS
 
     public boolean insert(Profile profile) {
@@ -170,6 +174,17 @@ public class Profile extends Observable {
             sql.close();
         }
         return null;
+    }
+
+    public boolean update(Profile profile, String profileName, String fname, String lname, String wallet, String userID){
+        SQLiteDatabase db = con.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("profileName", profileName);
+        contentValues.put("fname", fname);
+        contentValues.put("lname", lname);
+        contentValues.put("wallet", wallet);
+        db.update("Profile",contentValues, " userID = ? ", new String[] {userID});
+        return true;
     }
 
 }
