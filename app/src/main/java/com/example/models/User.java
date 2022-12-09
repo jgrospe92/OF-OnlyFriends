@@ -124,11 +124,14 @@ public class User extends Observable {
         try {
             Cursor c =  sql.rawQuery("SELECT * FROM user WHERE userID =?", new String[] {userID});
             c.moveToFirst();
+            String id = c.getString(0);
             String username = c.getString(1);
             String password = c.getString(2);
             String email = c.getString(3);
+            User user = new User(username, password, email);
+            user.setUserID(id);
             c.close();
-            return new User(username, password, email);
+            return user;
         } catch (Exception e) {
             Log.e("ERROR MESSAGE: ", e.getMessage());
 
@@ -143,7 +146,7 @@ public class User extends Observable {
 //        RETURNS USER OBJECT USING THE USERNAME
         SQLiteDatabase sql = con.getWritableDatabase();
         try {
-            Cursor c =  sql.rawQuery("SELECT * FROM user WHERE username =?", new String[] {user});
+            Cursor c =  sql.rawQuery("SELECT * FROM user WHERE username=?", new String[] {user});
             c.moveToFirst();
             String userID = c.getString(0);
             String username = c.getString(1);
@@ -151,14 +154,15 @@ public class User extends Observable {
             String email = c.getString(3);
             User getUser = new User(username, password, email);
             getUser.setUserID(userID);
+            Log.e("CHECKING ID", getUser.getUserID());
             c.close();
             return  getUser;
         } catch (Exception e) {
-            Log.e("ERROR MESSAGE: ", e.getMessage());
-            return null;
+            Log.e("ERROR FROM USER MODEL: ", e.getMessage());
         } finally {
             sql.close();
         }
+        return null;
     }
 
 

@@ -145,6 +145,7 @@ public class Profile extends Observable {
 
     }
 
+    // GET PROFILE USING USERID
     public Profile get(String userid){
         SQLiteDatabase sql = con.getWritableDatabase();
         try {

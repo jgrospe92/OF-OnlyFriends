@@ -3,6 +3,7 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -41,6 +42,12 @@ public class MainActivity extends AppCompatActivity {
                 String pass = userHelper.verifyPassword(username);
                 if (password.equals(pass)) {
                     Intent intent  = new Intent(getApplicationContext(), home.class);
+                    SharedPreferences.Editor data = getSharedPreferences("user", MODE_PRIVATE).edit();
+                    User currentUser = userHelper.getUserByUsername(username);
+                    data.putString("userID", currentUser.getUserID());
+                    data.putString("username", username);
+                    data.putBoolean("isLoggedIn", true);
+                    data.apply();
                     intent.putExtra("USERNAME", username);
                     startActivity(intent);
                 } else {
@@ -51,8 +58,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    // ON RESUME CLEAR INPUTS
+    @Override
+    protected void onResume() {
+        super.onResume();
+        eText_username.setText("");
+        eText_password.setText("");
+    }
+
     public void signUP(View view ) {
-        HashMap<String, String> data = new HashMap<>();
+
         Intent intent = new Intent(this.getApplicationContext(), register.class);
         startActivity(intent);
     }

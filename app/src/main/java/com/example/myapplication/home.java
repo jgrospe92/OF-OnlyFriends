@@ -9,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -56,6 +57,8 @@ public class home extends AppCompatActivity {
     TextView navFname, navProfileName, navSubscribedNum, navSubscriberNum,
             navFollowingNum, navFollowerNum;
 
+    // SHARED PREF
+    SharedPreferences userData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +66,9 @@ public class home extends AppCompatActivity {
         userHelper = new User(this);
         profileHelper = new Profile(this);
         welcomeText = findViewById(R.id.welcomeText);
+        // SHARED PREFERENCES
+        userData = getSharedPreferences("user", MODE_PRIVATE);
+
         // DRAWER STARTS
         my_drawer_layout = findViewById(R.id.my_drawer_layout);
         drawerNav = (NavigationView) findViewById(R.id.nav_drawer);
@@ -74,6 +80,11 @@ public class home extends AppCompatActivity {
                 switch (id) {
                     case R.id.nav_profile:
                         Toast.makeText(getApplicationContext(), "Profile clicked", Toast.LENGTH_SHORT).show();break;
+                    case R.id.nav_logout:
+                        userData.edit().putString("username", "");
+                        userData.edit().putString("userID", "");
+                        userData.edit().putBoolean("isLoggedIn",false);
+                        finish();break;
                     default:
                         return  true;
                 }
@@ -90,8 +101,9 @@ public class home extends AppCompatActivity {
         });
         // DRAWER ENDS
 
-        String username = getIntent().getStringExtra("USERNAME");
-        User user = userHelper.getUserByUsername(username);
+
+
+        User user = userHelper.get(userData.getString("userID",""));
         Profile profile = profileHelper.get(user.getUserID());
         profileImage = findViewById(R.id.profileImage);
         loadImage(profile.getImageLink(), this, profileImage);
