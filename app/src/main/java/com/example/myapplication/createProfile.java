@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.models.Helper;
 import com.example.models.Profile;
 
 import com.example.models.User;
@@ -43,6 +44,14 @@ public class createProfile extends AppCompatActivity {
         String lName = et_lname.getText().toString();
         String amount = et_amount.getText().toString();
         String imageLink = et_imageLink.getText().toString();
+
+        // VALIDATE INPUT
+        boolean validName = Helper.checkInput(et_profileName, "Pleaser enter your profile name");
+        boolean validFname = Helper.checkInput(et_fname, "Pleaser enter your first name");
+        boolean validLname = Helper.checkInput(et_lname, "Pleaser enter your last name");
+        boolean validAmount =  Helper.checkIfNumber(et_amount, "Please enter valid amount");
+
+        if (!validName || !validFname || !validLname || !validAmount){return;}
 
         Profile profile = new Profile(this);
         profile.setProfileName(profileName);

@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.models.Helper;
 import com.example.models.User;
 import com.example.myapplication.databinding.ActivityMainBinding;
 
@@ -40,6 +41,12 @@ public class MainActivity extends AppCompatActivity {
                 String username = eText_username.getText().toString();
                 String password = eText_password.getText().toString();
                 String pass = userHelper.verifyPassword(username);
+
+                Helper.checkInput(eText_username, "Please enter your username");
+                if(Helper.checkInput(eText_password, "Please enter your password")){
+                    return;
+                }
+
                 if (password.equals(pass)) {
                     Intent intent  = new Intent(getApplicationContext(), home.class);
                     SharedPreferences.Editor data = getSharedPreferences("user", MODE_PRIVATE).edit();

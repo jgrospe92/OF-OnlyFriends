@@ -1,4 +1,5 @@
 package com.example.myapplication;
+import com.example.models.Helper;
 import  com.example.models.dbConnector;
 import com.example.models.User;
 
@@ -48,9 +49,17 @@ public class register extends AppCompatActivity {
     public void saveUser(View view ) {
 
         username = et_username.getText().toString();
+        email = et_email.getText().toString();
         password = et_password.getText().toString();
         confirmPass = et_confirmPassword.getText().toString();
-        email = et_email.getText().toString();
+
+        boolean validUsername =  Helper.checkInput(et_username, "Please enter your username");
+        boolean validPass = Helper.checkInput(et_password, "Please enter your password");
+        boolean validConPass = Helper.checkInput(et_confirmPassword, "Please re-enter your password");
+        boolean validEmail = Helper.checkValidEmail(et_email, "Please enter a valid email");
+
+        if (!validUsername || !validPass || !validConPass || !validEmail){return;}
+
         if ( !password.equals(confirmPass)) {
             Toast.makeText(getApplicationContext(), "Password does not match", Toast.LENGTH_SHORT).show();
             return;
