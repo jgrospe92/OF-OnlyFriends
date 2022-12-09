@@ -8,6 +8,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,6 +16,11 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,6 +65,9 @@ public class home extends AppCompatActivity {
 
     // SHARED PREF
     SharedPreferences userData;
+
+    // POST DIALOG
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +77,7 @@ public class home extends AppCompatActivity {
         welcomeText = findViewById(R.id.welcomeText);
         // SHARED PREFERENCES
         userData = getSharedPreferences("user", MODE_PRIVATE);
+        // POST DIALOG INIT
 
         // DRAWER STARTS
         my_drawer_layout = findViewById(R.id.my_drawer_layout);
@@ -96,6 +106,7 @@ public class home extends AppCompatActivity {
         btn_fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                showPostDialog();
                 Toast.makeText(getApplicationContext(), "Fab click", Toast.LENGTH_SHORT).show();
             }
         });
@@ -204,4 +215,41 @@ public class home extends AppCompatActivity {
         navSubscriberNum.setText(subscriberNum);
         navSubscribedNum.setText(subscribedNum);
     }
+
+    // METHOD TO OPEN DIALOG
+    private void showPostDialog(){
+        Dialog dialog =  new Dialog(home.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.addpost);
+
+        // Initializes the views
+        EditText caption = dialog.findViewById(R.id.captionPostEditText);
+        CheckBox checkBox = dialog.findViewById(R.id.postCheckbox);
+        EditText postImageURL = dialog.findViewById(R.id.postImageURL);
+        Button postButton = dialog.findViewById(R.id.postButton);
+        Button cancelPostButton = dialog.findViewById(R.id.cancelPostButton);
+
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(isChecked){
+                    postImageURL.setVisibility(View.VISIBLE);
+                } else {
+                    postImageURL.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        cancelPostButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
+    }
+
 }

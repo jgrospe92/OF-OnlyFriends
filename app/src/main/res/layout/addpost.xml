@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:padding="15dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:text="ADD POST"/>
+
+    <EditText
+        android:id="@+id/captionPostEditText"
+        android:layout_width="360dp"
+        android:layout_height="200dp"
+        android:layout_weight="1"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="write something..."
+        android:inputType="textMultiLine" />
+    <CheckBox
+        android:id="@+id/postCheckbox"
+        android:layout_width="wrap_content"
+        android:text="Add Image"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/postImageURL"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="Enter image url"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/postButton"
+        android:layout_width="102dp"
+        android:layout_height="50dp"
+        android:layout_gravity="end"
+        android:layout_marginBottom="20dp"
+        android:padding="0dp"
+        android:background="@drawable/layout_blue_btn"
+        android:text="POST"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/cancelPostButton"
+        android:layout_width="102dp"
+        android:layout_height="50dp"
+        android:layout_gravity="end"
+        android:padding="0dp"
+        android:background="@drawable/layout_orange_btn"
+        android:text="CANCEL"/>
+
+
+</LinearLayout>
