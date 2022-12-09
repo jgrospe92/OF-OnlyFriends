@@ -206,10 +206,10 @@ public class home extends AppCompatActivity {
 
         String firstName = capitalizeFirstLetter(profile.getFname());
         String profileName = "@" + profile.getProfileName();
-        String followerNum = profile.getFollowerCount();
-        String followingNum = profile.getFollowingCount();
-        String subscriberNum = profile.getSubscriberCount();
-        String subscribedNum = profile.getSubscribedCount();
+        String followerNum = "0";
+        String followingNum = "0";
+        String subscriberNum = "0";
+        String subscribedNum = "0";
 
         navFname.setText(firstName);
         navProfileName.setText(profileName);
