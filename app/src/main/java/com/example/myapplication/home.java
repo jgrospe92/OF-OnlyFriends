@@ -12,6 +12,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -28,12 +29,17 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.model.LazyHeaders;
+import com.example.models.Post;
 import com.example.models.Profile;
 import com.example.models.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -58,6 +64,9 @@ public class home extends AppCompatActivity {
 
     Profile profileHelper;
     User userHelper;
+    Post postHelper;
+
+    Profile currentProfile;
 
     // DRAWER ITEMS
     TextView navFname, navProfileName, navSubscribedNum, navSubscriberNum,
@@ -67,6 +76,7 @@ public class home extends AppCompatActivity {
     SharedPreferences userData;
 
     // POST DIALOG
+    boolean hasImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,11 +125,11 @@ public class home extends AppCompatActivity {
 
 
         User user = userHelper.get(userData.getString("userID",""));
-        Profile profile = profileHelper.get(user.getUserID());
+        currentProfile = profileHelper.get(user.getUserID());
         profileImage = findViewById(R.id.profileImage);
-        loadImage(profile.getImageLink(), this, profileImage);
-        initProfile(profile);
-        welcomeText.setText("Welcome " + profile.getFname().toLowerCase());
+        loadImage(currentProfile.getImageLink(), this, profileImage);
+        initProfile(currentProfile);
+        welcomeText.setText("Welcome " + currentProfile.getFname().toLowerCase());
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -230,13 +240,56 @@ public class home extends AppCompatActivity {
         Button postButton = dialog.findViewById(R.id.postButton);
         Button cancelPostButton = dialog.findViewById(R.id.cancelPostButton);
 
+
+        // WHEN POST IS CLICKED
+        postButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String imageURL = "";
+                if (TextUtils.isEmpty(caption.getText().toString())){
+                    caption.setError("you forgot to write something");
+                    return;
+                }
+                String postCaption = caption.getText().toString();
+                if(hasImage){
+                     imageURL = postImageURL.getText().toString();
+                }
+
+                int likes = 0;
+                int favorites = 0;
+                Post post = new Post(getApplicationContext());
+
+                String profileID = currentProfile.getProfileID();
+                String datePosted = getCurrentDate();
+                post.setCaption(postCaption);
+                post.setDatePosted(datePosted);
+                post.setLikes(likes);
+                post.setImageURL(imageURL);
+                post.setFavorites(favorites);
+                post.setProfileID(profileID);
+
+                if(post.insert(post, "")) {
+                    Toast.makeText(getApplicationContext(), "Post added", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                    // TODO: ADD A FUNCTION TO RELOAD AND FETCH ALL DATA METHOD
+                } else {
+                    Toast.makeText(getApplicationContext(), "FAILED TO  CREATE POST", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+        // WHEN CANCEL IS CLICKED
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if(isChecked){
                     postImageURL.setVisibility(View.VISIBLE);
+                    hasImage = true;
+
                 } else {
                     postImageURL.setVisibility(View.GONE);
+                    hasImage = false;
                 }
             }
         });
@@ -250,6 +303,14 @@ public class home extends AppCompatActivity {
 
         dialog.show();
 
+    }
+
+    // GET CURRENT DATE
+    private String getCurrentDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        Date date = new Date();
+        return dateFormat.format(date);
     }
 
 }
