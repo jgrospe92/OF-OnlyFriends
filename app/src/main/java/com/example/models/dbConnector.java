@@ -32,7 +32,6 @@ public class dbConnector extends SQLiteOpenHelper {
 //      USER TABLE
         db.execSQL("create table user (userID integer primary key autoincrement, username varchar UNIQUE, password varchar, email varchar)");
 //      PROFILE TABLE
-
         db.execSQL("create table profile (profileID integer primary key autoincrement, profileName varchar, fname varchar, lname varchar, isFollowed integer, isSubscribed integer, wallet varchar, imageLink varchar, userID integer, foreign key (userID) references user (userID) on delete cascade)");
 //      FOLLOWER TABLE
         db.execSQL("create table follower (followerID integer primary key autoincrement, dateFollowed text, profileID integer , foreign key (profileID) references profile (profileID) on delete cascade )");
@@ -54,8 +53,12 @@ public class dbConnector extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("drop table if exists user");
         db.execSQL("drop table if exists profile");
-        db.execSQL("drop table if exists subscription");
+        db.execSQL("drop table if exists follower");
+        db.execSQL("drop table if exists subscriber");
+        db.execSQL("drop table if exists following");
+        db.execSQL("drop table if exists subscribed");
         db.execSQL("drop table if exists post");
+        db.execSQL("drop table if exists comment");
         onCreate(db);
 
     }

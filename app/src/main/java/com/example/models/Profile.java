@@ -162,6 +162,7 @@ public class Profile extends Observable {
             String userID = c.getString(8);
             Profile profile = new Profile(profileName, fname,lname,isFollowed,isSubscribed,wallet,imageLink,userID);
             profile.setProfileID(String.valueOf(profileID));
+            c.close();
             return profile;
         } catch (Exception e) {
             Log.e("ERROR MESSAGE: ", e.getMessage());
@@ -171,5 +172,24 @@ public class Profile extends Observable {
         }
         return null;
     }
+    
+    public boolean update(Profile profile, String profileName, String fname, String lname, String wallet, String userID){
+        SQLiteDatabase db = con.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("profileName", profileName);
+        contentValues.put("fname", fname);
+        contentValues.put("lname", lname);
+        contentValues.put("wallet", wallet);
+        try {
+            db.update("Profile",contentValues, " userID = ? ", new String[] {userID});
+            return true;
+        } catch (Exception e){
+            Log.e("ERROR MESSAGE: ", e.getMessage());
+        } finally {
+            db.close();
+        }
+        return false;
+    }
+
 
 }

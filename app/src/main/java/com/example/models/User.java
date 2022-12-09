@@ -127,12 +127,14 @@ public class User extends Observable {
             String username = c.getString(1);
             String password = c.getString(2);
             String email = c.getString(3);
+            c.close();
             return new User(username, password, email);
         } catch (Exception e) {
             Log.e("ERROR MESSAGE: ", e.getMessage());
 
         } finally {
             sql.close();
+
         }
         return null;
     }
@@ -149,6 +151,7 @@ public class User extends Observable {
             String email = c.getString(3);
             User getUser = new User(username, password, email);
             getUser.setUserID(userID);
+            c.close();
             return  getUser;
         } catch (Exception e) {
             Log.e("ERROR MESSAGE: ", e.getMessage());
@@ -166,6 +169,7 @@ public class User extends Observable {
             String query = "SELECT password FROM user WHERE username=?";
             Cursor c = sql.rawQuery(query, new String[]{username});
             if (c.moveToFirst()){
+                c.close();
                 return c.getString(c.getColumnIndex("password"));
             }
         } catch (Exception e) {
