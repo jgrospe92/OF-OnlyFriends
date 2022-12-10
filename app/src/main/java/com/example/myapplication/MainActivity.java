@@ -42,10 +42,10 @@ public class MainActivity extends AppCompatActivity {
                 String password = eText_password.getText().toString();
                 String pass = userHelper.verifyPassword(username);
 
-                Helper.checkInput(eText_username, "Please enter your username");
-                if(Helper.checkInput(eText_password, "Please enter your password")){
-                    return;
-                }
+                boolean validUsername = Helper.checkInput(eText_username, "Please enter your username");
+                boolean validPassword  = Helper.checkInput(eText_password, "Please enter your password");
+
+                if (!validUsername || !validPassword){return;}
 
                 if (password.equals(pass)) {
                     Intent intent  = new Intent(getApplicationContext(), home.class);

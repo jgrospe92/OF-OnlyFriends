@@ -144,6 +144,33 @@ public class Profile extends Observable {
         return true;
 
     }
+    // GET PROFILE USING PROFILEID
+    public Profile getProfileByID(String id){
+        SQLiteDatabase sql = con.getWritableDatabase();
+        try {
+            Cursor c =  sql.rawQuery("SELECT * FROM profile WHERE profileID = ?", new String[] {id});
+            c.moveToFirst();
+            int profileID = c.getInt(0);
+            String profileName = c.getString(1);
+            String fname = c.getString(2);
+            String lname = c.getString(3);
+            int isFollowed = c.getInt(4);
+            int isSubscribed = c.getInt(5);
+            String wallet = c.getString(6);
+            String imageLink = c.getString(7);
+            String userID = c.getString(8);
+            Profile profile = new Profile(profileName, fname,lname,isFollowed,isSubscribed,wallet,imageLink,userID);
+            profile.setProfileID(String.valueOf(profileID));
+            c.close();
+            return profile;
+        } catch (Exception e) {
+            Log.e("ERROR MESSAGE: ", e.getMessage());
+
+        } finally {
+            sql.close();
+        }
+        return null;
+    }
 
     // GET PROFILE USING USERID
     public Profile get(String userid){

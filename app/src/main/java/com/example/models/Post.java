@@ -3,6 +3,7 @@ package com.example.models;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -19,6 +20,16 @@ public class Post extends Observable {
     private int favorites;
     private String imageURL;
     private String profileID;
+
+    public int getNumOfReplies() {
+        return numOfReplies;
+    }
+
+    public void setNumOfReplies(int numOfReplies) {
+        this.numOfReplies = numOfReplies;
+    }
+
+    private int numOfReplies;
     dbConnector con;
 
     // CONSTRUCTORS
@@ -139,14 +150,11 @@ public class Post extends Observable {
                 p.setImageURL(c.getString(5)); // imageURL
                 p.setProfileID(c.getString(6));
                 posts.add(p);
-            } while (c.moveToFirst());
-            c.close(); // close the cursor
-            sql.close();
-            return posts;
+            } while (c.moveToNext());
         }
         c.close(); // close the cursor
         sql.close();
-        return null;
+        return posts;
     }
 
     // SEARCH POST BY KEYWORD(s); returns an arrayList of type Post
@@ -159,7 +167,7 @@ public class Post extends Observable {
         try {
             // opens a cursor
             Cursor c = sql.rawQuery("SELECT * FROM post WHERE caption like ? ", new String[]{"%" + word + "%"});
-            while (c.moveToFirst()) {
+            while (c.moveToNext()) {
                 Post p = new Post();
                 p.setPostID(c.getString(0)); // postID
                 p.setCaption(c.getString(1)); // captionID
@@ -200,6 +208,13 @@ public class Post extends Observable {
             sql.close();
         }
         return false;
+    }
+
+    // GET NUMBER OF COMMENTS
+    public  String getNumberOfComments(String postID){
+        SQLiteDatabase sql = con.getWritableDatabase();
+        long count = DatabaseUtils.queryNumEntries(sql, "comment", "postID=?", new String[]{postID});
+        return  String.valueOf(count);
     }
 
     public Post get(String postID) {

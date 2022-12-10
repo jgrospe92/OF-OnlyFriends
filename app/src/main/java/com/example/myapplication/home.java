@@ -84,7 +84,7 @@ public class home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         userHelper = new User(this);
         profileHelper = new Profile(this);
-        welcomeText = findViewById(R.id.welcomeText);
+//        welcomeText = findViewById(R.id.welcomeText);
         // SHARED PREFERENCES
         userData = getSharedPreferences("user", MODE_PRIVATE);
         // POST DIALOG INIT
@@ -92,6 +92,7 @@ public class home extends AppCompatActivity {
         // DRAWER STARTS
         my_drawer_layout = findViewById(R.id.my_drawer_layout);
         drawerNav = (NavigationView) findViewById(R.id.nav_drawer);
+
         drawerNav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -129,11 +130,11 @@ public class home extends AppCompatActivity {
         profileImage = findViewById(R.id.profileImage);
         loadImage(currentProfile.getImageLink(), this, profileImage);
         initProfile(currentProfile);
-        welcomeText.setText("Welcome " + currentProfile.getFname().toLowerCase());
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.parentFragment, homefragment).commit();
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnItemSelectedListener(item -> {
-
             switch (item.getItemId()) {
                 case R.id.home:
                     getSupportFragmentManager().beginTransaction().replace(R.id.parentFragment, homefragment).commit();
