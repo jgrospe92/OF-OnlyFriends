@@ -16,10 +16,17 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.model.LazyHeaders;
+import com.example.models.Helper;
 import com.example.models.Post;
 import com.example.models.Profile;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -57,6 +64,11 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
         holder.tv_replyCount.setText(postHelper.getNumberOfComments(postsData.get(position).getPostID()));
         holder.tv_likeCount.setText(String.valueOf(postsData.get(position).getLikes()));
         holder.tv_savedCount.setText(String.valueOf(postsData.get(position).getFavorites()));
+        String datePosted = postsData.get(position).getDatePosted();
+//        holder.tv_datePosted.setText(datePosted);
+
+        // CALCULATE TIME DIFFERENCES
+        holder.tv_datePosted.setText(Helper.getTimeDiff(datePosted));
 
 
         GlideUrl profileImage = new GlideUrl(profile.getImageLink(), new LazyHeaders.Builder()
@@ -72,7 +84,6 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
                 .centerCrop()
                 .into(holder.circleImageView);
 
-
         if (!postsData.get(position).getImageURL().isEmpty()) {
 
             GlideUrl postImage = new GlideUrl(postsData.get(position).getImageURL(), new LazyHeaders.Builder()
@@ -81,6 +92,15 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
             Glide.with(mInflater.getContext())
                     .asBitmap()
                     .load(postImage)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .placeholder(R.drawable.defaul_image)
+                    .error(R.drawable.defaul_image)
+                    .centerCrop()
+                    .into(holder.postImage);
+        } else {
+            Glide.with(mInflater.getContext())
+                    .asBitmap()
+                    .load(R.drawable.defaul_image)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .placeholder(R.drawable.defaul_image)
                     .error(R.drawable.defaul_image)
@@ -106,6 +126,7 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
         TextView tv_replyCount;
         TextView tv_likeCount;
         TextView tv_savedCount;
+        TextView tv_datePosted;
 
         public VIewHolder(@NonNull View itemView) {
             super(itemView);
@@ -117,6 +138,7 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
             tv_replyCount = itemView.findViewById(R.id.tv_replyCount);
             tv_likeCount = itemView.findViewById(R.id.tv_likeCount);
             tv_savedCount = itemView.findViewById(R.id.tv_savedCount);
+            tv_datePosted = itemView.findViewById(R.id.tv_datePosted);
 
 
         }

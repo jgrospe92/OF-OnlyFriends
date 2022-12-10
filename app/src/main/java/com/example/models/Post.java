@@ -138,7 +138,7 @@ public class Post extends Observable {
         SQLiteDatabase sql = con.getWritableDatabase();
         ArrayList<Post> posts = new ArrayList<>();
         // opens a cursor
-        Cursor c = sql.rawQuery("SELECT * FROM post", null);
+        Cursor c = sql.rawQuery("SELECT * FROM post ORDER by postID desc", null);
         if (c.moveToFirst()) {
             do {
                 Post p = new Post();

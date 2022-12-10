@@ -50,8 +50,9 @@ public class createProfile extends AppCompatActivity {
         boolean validFname = Helper.checkInput(et_fname, "Pleaser enter your first name");
         boolean validLname = Helper.checkInput(et_lname, "Pleaser enter your last name");
         boolean validAmount =  Helper.checkIfNumber(et_amount, "Please enter valid amount");
+        boolean validURL = Helper.checkImageURL(et_imageLink, "Incorrect Image URL");
 
-        if (!validName || !validFname || !validLname || !validAmount){return;}
+        if (!validName || !validFname || !validLname || !validAmount || !validURL){return;}
 
         Profile profile = new Profile(this);
         profile.setProfileName(profileName);

@@ -43,8 +43,15 @@ public class homefragment extends Fragment {
         recycleViewAdapterHome = new RVAhome(view.getContext(), posts);
         home_recycleView.addItemDecoration(new DividerItemDecoration(view.getContext(),
                 DividerItemDecoration.VERTICAL));
+        recycleViewAdapterHome.notifyDataSetChanged();
         home_recycleView.setAdapter(recycleViewAdapterHome);
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
     }
 }
