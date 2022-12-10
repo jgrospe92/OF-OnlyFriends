@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -17,7 +18,7 @@ import com.example.models.User;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 public class profilePage extends AppCompatActivity {
-
+    Button searchButton;
     User userHelper;
     Profile profileHelper;
     CircleImageView profileImg;
@@ -37,6 +38,16 @@ public class profilePage extends AppCompatActivity {
         followingCountTxt = findViewById(R.id.followingCountTextView);
         followerCountTxt = findViewById(R.id.followerCountTextView);
 
+        searchButton = findViewById(R.id.searchButton);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SearchUser.class);
+                startActivity(intent);
+            }
+        });
+
+
 
 
 
@@ -50,8 +61,8 @@ public class profilePage extends AppCompatActivity {
         //initProfile(profile);
         fnameTxt.setText(profile.getFname());
         profileNameTagTxt.setText("@"+profile.getProfileName());
-        followingCountTxt.setText(profile.getFollowingCount());
-        followerCountTxt.setText(profile.getFollowerCount());
+        //followingCountTxt.setText(profile.getFollowingCount());
+        //followerCountTxt.setText(profile.getFollowerCount());
         //welcomeText.setText("Welcome " + profile.getFname().toLowerCase());
 
     }
