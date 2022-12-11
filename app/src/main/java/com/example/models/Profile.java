@@ -176,7 +176,7 @@ public class Profile extends Observable {
         return null;
     }
 
-    public boolean update(Profile profile, String profileName, String fname, String lname, String wallet, String userID){
+    public boolean update( String profileName, String fname, String lname, String wallet, String userID){
         SQLiteDatabase db = con.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("profileName", profileName);
@@ -186,6 +186,7 @@ public class Profile extends Observable {
         db.update("Profile",contentValues, " userID = ? ", new String[] {userID});
         return true;
     }
+
 
     //
 

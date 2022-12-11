@@ -14,6 +14,8 @@ public class dbConnector extends SQLiteOpenHelper {
     public static final String DB_NAME = "Test.db";
     public static final int DB_VERSION = 1;
 
+
+
     public static synchronized dbConnector getInstance(Context context){
         if (sInstance == null) {
             sInstance = new dbConnector(context.getApplicationContext());
@@ -61,5 +63,6 @@ public class dbConnector extends SQLiteOpenHelper {
     }
 
     // USER
+
 
 }
