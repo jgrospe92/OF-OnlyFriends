@@ -10,10 +10,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -48,8 +48,6 @@ public class home extends AppCompatActivity {
 
     CircleImageView profileImage;
     FloatingActionButton btn_fab;
-
-    TextView welcomeText;
 
     DrawerLayout my_drawer_layout;
     NavigationView drawerNav;
@@ -112,7 +110,8 @@ public class home extends AppCompatActivity {
                     case R.id.nav_settings:
                         Toast.makeText(getApplicationContext(), "Settings  clicked", Toast.LENGTH_SHORT).show();break;
                     case R.id.nav_help:
-                        Toast.makeText(getApplicationContext(), "Help menu  clicked", Toast.LENGTH_SHORT).show();break;
+                        switchActivity(Helpmenu.class);
+                        break;
                     case R.id.nav_logout:
                         userData.edit().putString("username", "");
                         userData.edit().putString("userID", "");
@@ -176,6 +175,12 @@ public class home extends AppCompatActivity {
         // DRAWER listener
 
 
+    }
+
+    // METHOD TO SWITCH TO A NEW ACTIVITY
+    private void switchActivity(Class activityClass){
+        Intent switchActivity = new Intent(getApplicationContext(), activityClass);
+        startActivity(switchActivity);
     }
 
     @Override

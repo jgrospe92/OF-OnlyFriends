@@ -5,4 +5,5 @@
 
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
+    <string name="help_uploadIMG">You have to copy the link address of the image that you want to upload.The link should start with https://. The application will tell you if it is in the correct format</string>
 </resources>
