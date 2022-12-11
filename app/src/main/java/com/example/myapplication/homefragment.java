@@ -89,7 +89,6 @@ public class homefragment extends Fragment implements RVAhome.ItemClickListener 
     @Override
     public void onItemClick(View view, int position) {
         // TODO display all comments
-
         showCommentSectionDialog(position);
         recycleViewAdapterHome.notifyItemChanged(position);
     }

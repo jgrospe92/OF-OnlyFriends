@@ -101,6 +101,18 @@ public class home extends AppCompatActivity {
                 switch (id) {
                     case R.id.nav_profile:
                         Toast.makeText(getApplicationContext(), "Profile clicked", Toast.LENGTH_SHORT).show();break;
+                    case R.id.nav_likes:
+                        Toast.makeText(getApplicationContext(), "likes clicked", Toast.LENGTH_SHORT).show();break;
+                    case  R.id.nav_secrets:
+                        Toast.makeText(getApplicationContext(), "Secrets clicked", Toast.LENGTH_SHORT).show();break;
+                    case R.id.nav_saved:
+                        Toast.makeText(getApplicationContext(), "Saved Post clicked", Toast.LENGTH_SHORT).show();break;
+                    case R.id.nav_credit:
+                        Toast.makeText(getApplicationContext(), "Credit  clicked", Toast.LENGTH_SHORT).show();break;
+                    case R.id.nav_settings:
+                        Toast.makeText(getApplicationContext(), "Settings  clicked", Toast.LENGTH_SHORT).show();break;
+                    case R.id.nav_help:
+                        Toast.makeText(getApplicationContext(), "Help menu  clicked", Toast.LENGTH_SHORT).show();break;
                     case R.id.nav_logout:
                         userData.edit().putString("username", "");
                         userData.edit().putString("userID", "");

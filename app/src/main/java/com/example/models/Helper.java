@@ -63,6 +63,9 @@ public class Helper {
             Date currentDate = new Date();
 
             long difference_In_Time = datepost.getTime() - currentDate.getTime();
+            long difference_In_Days = (difference_In_Time
+                    / (1000 * 60 * 60 * 24))
+                    % 365;
 
             long difference_In_Minutes = TimeUnit
                     .MILLISECONDS
@@ -73,10 +76,12 @@ public class Helper {
                     .MILLISECONDS
                     .toHours(difference_In_Time)
                     % 24;
-            long h= Math.abs(difference_In_Hours);
-            String hr = h == 0 ? "" : String.valueOf(h) + "h" ;
+            long h = Math.abs(difference_In_Hours);
+            long d = Math.abs(difference_In_Days);
+            String hr = (h == 0) ? "" : h + "h" ;
+            String day = (d <= 0) ? "" : (d > 1) ? d+"days" : d+"day";
             String min = String.valueOf(Math.abs(difference_In_Minutes));
-            return  hr + " " + min + "mins ago";
+            return  day + " " + hr + " " + min + "min ago";
         } catch (ParseException e) {
             e.printStackTrace();
         }

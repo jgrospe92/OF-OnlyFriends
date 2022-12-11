@@ -59,7 +59,7 @@ public class RVAcomment extends  RecyclerView.Adapter<RVAcomment.VIewHolder>{
                     .centerCrop()
                     .into(holder.profileImage);
 //
-                    holder.commentProfileName.setText("Jeffrey");
+                    holder.commentProfileName.setText(profile.getProfileName());
                     holder.commentET.setText(comments.get(position).getCaption());
         } else {
             // SET profle Image
