@@ -20,6 +20,7 @@ public class Comment extends  Observable{
 
     // CONSTRUCTORS
     public Comment(){} // EMPTY CONSTRUCTOR
+
     public Comment(String caption, String datePosted, String profileID, String postID) {
         this.caption = caption;
         this.datePosted = datePosted;
@@ -110,7 +111,7 @@ public class Comment extends  Observable{
                 comment.setPostID(c.getString(c.getColumnIndexOrThrow("postID")));
                 comments.add(comment);
 
-            }while (c.moveToFirst());
+            }while (c.moveToNext());
             c.close();
             sql.close();
             return  comments;

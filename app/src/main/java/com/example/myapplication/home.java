@@ -227,6 +227,8 @@ public class home extends AppCompatActivity {
         navSubscribedNum.setText(subscribedNum);
     }
 
+
+
     // METHOD TO OPEN DIALOG
     private void showPostDialog(){
         Dialog dialog =  new Dialog(home.this);

@@ -177,7 +177,7 @@ public class Profile extends Observable {
         SQLiteDatabase sql = con.getWritableDatabase();
         try {
 
-            Cursor c =  sql.rawQuery("SELECT * FROM profile INNER JOIN user ON profile.userID = ?", new String[] {userid});
+            Cursor c =  sql.rawQuery("SELECT * FROM profile WHERE userID = ?", new String[] {userid});
             c.moveToFirst();
             int profileID = c.getInt(0);
             String profileName = c.getString(1);

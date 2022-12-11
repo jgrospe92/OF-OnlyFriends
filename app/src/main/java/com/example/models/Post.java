@@ -133,6 +133,7 @@ public class Post extends Observable {
         }
     }
 
+
     // GET ALL POST
     public ArrayList<Post> getAllPosts() {
         SQLiteDatabase sql = con.getWritableDatabase();
