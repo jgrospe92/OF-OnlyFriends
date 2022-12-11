@@ -43,20 +43,21 @@ public class RVAcomment extends  RecyclerView.Adapter<RVAcomment.VIewHolder>{
         Profile profile = new Profile(mInflater.getContext());
 
         if(getItemCount() >= 0){
-            Log.e("Profile is", String.valueOf(position));
+            Log.e("Profile is", String.valueOf(comments.get(position).getProfileID()));
+            profile = profile.getProfileByID(comments.get(position).getProfileID());
 
             // SET profle Image
-//            GlideUrl profileImage = new GlideUrl(profile.getImageLink(), new LazyHeaders.Builder()
-//                    .addHeader("User-Agent", "profileImage")
-//                    .build());
-//            Glide.with(mInflater.getContext())
-//                    .asBitmap()
-//                    .load(profileImage)
-//                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                    .placeholder(R.drawable.ic_launcher_background)
-//                    .error(R.drawable.ic_launcher_background)
-//                    .centerCrop()
-//                    .into(holder.profileImage);
+            GlideUrl profileImage = new GlideUrl(profile.getImageLink(), new LazyHeaders.Builder()
+                    .addHeader("User-Agent", "profileImage")
+                    .build());
+            Glide.with(mInflater.getContext())
+                    .asBitmap()
+                    .load(profileImage)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .placeholder(R.drawable.account)
+                    .error(R.drawable.account)
+                    .centerCrop()
+                    .into(holder.profileImage);
 //
                     holder.commentProfileName.setText("Jeffrey");
                     holder.commentET.setText(comments.get(position).getCaption());

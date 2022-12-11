@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.models.Comment;
 import com.example.models.Post;
+import com.example.models.Profile;
 
 import java.util.ArrayList;
 
@@ -75,6 +76,8 @@ public class homefragment extends Fragment implements RVAhome.ItemClickListener 
         RecyclerView recyclerView = new RecyclerView(getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         RVAcomment commentAdapter = new RVAcomment(view.getContext(), comments);
+        recyclerView.addItemDecoration(new DividerItemDecoration(view.getContext(),
+                DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(commentAdapter);
         dialog.setContentView(recyclerView);
         dialog.show();
@@ -86,6 +89,7 @@ public class homefragment extends Fragment implements RVAhome.ItemClickListener 
     @Override
     public void onItemClick(View view, int position) {
         // TODO display all comments
+
         showCommentSectionDialog(position);
         recycleViewAdapterHome.notifyItemChanged(position);
     }
