@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -55,14 +56,17 @@ public class EditProfile extends AppCompatActivity {
                 //Profile profile = new Profile();
                 String userID = profile.getUserID();
                 boolean isUpdated =   profileHelper.update(
-                        userID,
                         profNameEditTxt.getText().toString(),
                         fnameEditTxt.getText().toString(),
                         lnameEditTxt.getText().toString(),
-                        walletEditTxt.getText().toString());
+                        walletEditTxt.getText().toString(),userID);
                 if(isUpdated == true) {
                     Toast.makeText(getApplicationContext(),"Profile updated ",
                             Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(getApplicationContext(), profilePage.class);
+                    intent.putExtra("USERNAME", username);
+                    startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(),"Profile not updated ",
                             Toast.LENGTH_SHORT).show();
