@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OtherProfilePage">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/otherProfileImg"
+        android:layout_width="69dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/account"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/otherBoldFName"
+        android:layout_width="95dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:text="FNAME"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/otherProfileImg" />
+
+    <TextView
+        android:id="@+id/otherProfileNameTag"
+        android:layout_width="109dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="9dp"
+        android:text="ProfileNameTag"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/otherBoldFName" />
+
+    <TextView
+        android:id="@+id/otherProfileDescriptionTextView"
+        android:layout_width="342dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/otherProfileNameTag" />
+
+    <ImageView
+        android:id="@+id/otherLinkIconImageView"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/otherProfileDescriptionTextView"
+        app:srcCompat="@drawable/linkicon" />
+
+    <TextView
+        android:id="@+id/otherLinkTextView"
+        android:layout_width="62dp"
+        android:layout_height="17dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="12dp"
+        android:text="link"
+        app:layout_constraintStart_toEndOf="@+id/otherLinkIconImageView"
+        app:layout_constraintTop_toBottomOf="@+id/otherProfileDescriptionTextView" />
+
+    <ImageView
+        android:id="@+id/otherCalendarIconImageView"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toEndOf="@+id/otherLinkTextView"
+        app:layout_constraintTop_toBottomOf="@+id/otherProfileDescriptionTextView"
+        app:srcCompat="@drawable/calendaricon" />
+
+    <TextView
+        android:id="@+id/otherJoinedDateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="12dp"
+        android:text="Joined Date Text View"
+        app:layout_constraintStart_toEndOf="@+id/otherCalendarIconImageView"
+        app:layout_constraintTop_toBottomOf="@+id/otherProfileDescriptionTextView" />
+
+    <TextView
+        android:id="@+id/otherFollowingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="16dp"
+        android:text="Following"
+        app:layout_constraintStart_toEndOf="@+id/otherFollowingCountTextView"
+        app:layout_constraintTop_toBottomOf="@+id/otherLinkTextView" />
+
+    <TextView
+        android:id="@+id/otherFollowingCountTextView"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:text="0"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/otherLinkIconImageView" />
+
+    <TextView
+        android:id="@+id/otherFollowerCountTextView"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="20dp"
+        android:text="0"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/otherFollowingTextView"
+        app:layout_constraintTop_toBottomOf="@+id/otherCalendarIconImageView" />
+
+    <TextView
+        android:id="@+id/otherFollowersTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="15dp"
+        android:text="Followers"
+        app:layout_constraintStart_toEndOf="@+id/otherFollowerCountTextView"
+        app:layout_constraintTop_toBottomOf="@+id/otherJoinedDateTextView" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/otherProfilePostRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="375dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/otherFollowersTextView" />
+
+    <Button
+        android:id="@+id/searchButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="52dp"
+        android:text="Search"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/followUnfollowBtnImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="152dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="33dp"
+        app:layout_constraintBottom_toTopOf="@+id/otherProfileDescriptionTextView"
+        app:layout_constraintStart_toEndOf="@+id/otherBoldFName"
+        app:layout_constraintTop_toBottomOf="@+id/imageView7"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/followbtn" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="168dp"
+        android:layout_marginTop="112dp"
+        app:layout_constraintStart_toEndOf="@+id/otherProfileImg"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/subscribebtn" />
+</androidx.constraintlayout.widget.ConstraintLayout>

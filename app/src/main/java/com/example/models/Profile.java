@@ -34,6 +34,18 @@ public class Profile extends Observable {
         this.userID = userID;
     }
 
+    public Profile(String profileName, String fname, String imageLink, String userID){
+
+        this.profileName = profileName;
+        this.fname = fname;
+        this.imageLink = imageLink;
+        this.userID = userID;
+    }
+    public Profile(String fname){
+        this.fname = fname;
+    }
+
+
 
 //    GETTERS AND SETTERS
 
@@ -186,7 +198,43 @@ public class Profile extends Observable {
         db.update("Profile",contentValues, " userID = ? ", new String[] {userID});
         return true;
     }
+/*
+    //Fetch FName
+    public Profile fetchFirstName(String firstName){
+        SQLiteDatabase sql = con.getWritableDatabase();
+        try {
+            Cursor c =  sql.rawQuery("SELECT * FROM Profile WHERE fName =?", new String[] {firstName});
+            c.moveToFirst();
+            String profileID = c.getString(0);
+            String profileName = c.getString(1);
+            String fName = c.getString(2);
+            String lName = c.getString(3);
 
-    //
+            Profile getProfile = new Profile(profileID,profileName, fName, lName);
+            getProfile.setProfileID(profileID); //sets the id value of profileId which came from c.getString(0)
+            return  getProfile;
+        } catch (Exception e) {
+            Log.e("ERROR MESSAGE Jed: ", e.getMessage());
+            return null;
+        } finally {
+            sql.close();
+        }
+
+    }
+*/
+    public Cursor displaySearchedUser(String firstName){
+        SQLiteDatabase sql = con.getWritableDatabase();
+        Cursor c = sql.rawQuery("SELECT * FROM Profile WHERE UPPER(fName)=? ", new String[] {firstName});
+        return c;
+    }
+
+    /*
+    public Cursor displaySearchedUser(){
+        SQLiteDatabase sql = con.getWritableDatabase();
+        Cursor c = sql.rawQuery("SELECT * FROM Profile", null);
+        return c;
+    }
+*/
+
 
 }

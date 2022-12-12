@@ -39,10 +39,18 @@ public class profilePage extends AppCompatActivity {
         followerCountTxt = findViewById(R.id.followerCountTextView);
 
         searchButton = findViewById(R.id.searchButton);
+
+        //Getting the user's name and current image
+        username = getIntent().getStringExtra("USERNAME");
+        User user = userHelper.getUserByUsername(username);
+        Profile profile = profileHelper.get(user.getUserID());
+        profileImg = findViewById(R.id.profileImg);
+        loadImage(profile.getImageLink(), this, profileImg);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), SearchUser.class);
+                intent.putExtra("USERNAME", username);
                 startActivity(intent);
             }
         });
@@ -51,16 +59,11 @@ public class profilePage extends AppCompatActivity {
 
 
 
-        //Getting the user's name and current image
-        username = getIntent().getStringExtra("USERNAME");
-        User user = userHelper.getUserByUsername(username);
-        Profile profile = profileHelper.get(user.getUserID());
-        profileImg = findViewById(R.id.profileImg);
-        loadImage(profile.getImageLink(), this, profileImg);
+
 
         //initProfile(profile);
         fnameTxt.setText(profile.getFname());
-        profileNameTagTxt.setText("@"+profile.getProfileName());
+        profileNameTagTxt.setText(profile.getProfileName());
         //followingCountTxt.setText(profile.getFollowingCount());
         //followerCountTxt.setText(profile.getFollowerCount());
         //welcomeText.setText("Welcome " + profile.getFname().toLowerCase());

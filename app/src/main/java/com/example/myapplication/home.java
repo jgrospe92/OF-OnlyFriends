@@ -217,5 +217,6 @@ public class home extends AppCompatActivity {
         navFollowingNum.setText(followingNum);
         navSubscriberNum.setText(subscriberNum);
         navSubscribedNum.setText(subscribedNum);
+
     }
 }
