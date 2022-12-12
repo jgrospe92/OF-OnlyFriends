@@ -91,6 +91,16 @@ public class home extends AppCompatActivity {
         my_drawer_layout = findViewById(R.id.my_drawer_layout);
         drawerNav = (NavigationView) findViewById(R.id.nav_drawer);
 
+        User user = userHelper.get(userData.getString("userID",""));
+        String username = getIntent().getStringExtra("USERNAME");
+        currentProfile = profileHelper.get(user.getUserID());
+        profileImage = findViewById(R.id.profileImage);
+        loadImage(currentProfile.getImageLink(), this, profileImage);
+        initProfile(currentProfile);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.parentFragment, homefragment).commit();
+
+
         drawerNav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -98,7 +108,10 @@ public class home extends AppCompatActivity {
                 my_drawer_layout.closeDrawer(GravityCompat.START);
                 switch (id) {
                     case R.id.nav_profile:
-                        Toast.makeText(getApplicationContext(), "Profile clicked", Toast.LENGTH_SHORT).show();break;
+                        //Toast.makeText(getApplicationContext(), "Profile clicked", Toast.LENGTH_SHORT).show();break;
+                        Intent intent = new Intent(getApplicationContext(), profilePage.class);
+                        intent.putExtra("USERNAME", username);
+                        startActivity(intent);
                     case R.id.nav_likes:
                         Toast.makeText(getApplicationContext(), "likes clicked", Toast.LENGTH_SHORT).show();break;
                     case  R.id.nav_secrets:
@@ -136,25 +149,24 @@ public class home extends AppCompatActivity {
 
 
 
-        User user = userHelper.get(userData.getString("userID",""));
-        currentProfile = profileHelper.get(user.getUserID());
-        profileImage = findViewById(R.id.profileImage);
-        loadImage(currentProfile.getImageLink(), this, profileImage);
-        initProfile(currentProfile);
-
-        getSupportFragmentManager().beginTransaction().replace(R.id.parentFragment, homefragment).commit();
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnItemSelectedListener(item -> {
+
             switch (item.getItemId()) {
                 case R.id.home:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.parentFragment, homefragment).commit();
-                    Toast.makeText(getApplicationContext(), "home click", Toast.LENGTH_SHORT).show();
+                   // getSupportFragmentManager().beginTransaction().replace(R.id.parentFragment, homefragment).commit();
+                   // Toast.makeText(getApplicationContext(), "home click", Toast.LENGTH_SHORT).show();
+
                     return true;
 
                 case R.id.search:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.parentFragment, searchFragment).commit();
-                    Toast.makeText(getApplicationContext(), "search click", Toast.LENGTH_SHORT).show();
+                   // getSupportFragmentManager().beginTransaction().replace(R.id.parentFragment, searchFragment).commit();
+                    //Toast.makeText(getApplicationContext(), "search click", Toast.LENGTH_SHORT).show();
+                    Intent searchIntent = new Intent(getApplicationContext(), SearchUser.class);
+                    searchIntent.putExtra("USERNAME", username);
+                    startActivity(searchIntent);
+
 
                     break;
 

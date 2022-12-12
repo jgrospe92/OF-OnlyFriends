@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SearchUser">
+
+
+    <!--    //Drawer MENU -->
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchViewFname"
+        android:layout_width="327dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="96dp"
+        android:background="@drawable/layout_search_bg"
+        app:iconifiedByDefault="false"
+        app:queryHint="Search Names Here..." />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/searchedUserRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="395dp"
+        android:layout_marginTop="52dp" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        app:menu="@menu/bottom_nav_menu">
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+</LinearLayout>

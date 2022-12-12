@@ -1,0 +1,101 @@
+package com.example.myapplication;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.models.Profile;
+import com.example.models.User;
+
+
+public class EditProfile extends AppCompatActivity {
+    User userHelper;
+    Profile profileHelper;
+    EditText profNameEditTxt, fnameEditTxt, lnameEditTxt, walletEditTxt;
+    Button updateButton, cancelButton;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_edit_profile);
+
+        userHelper = new User(this);
+        profileHelper = new Profile(this);
+
+        //Defining the EditText in Edit Profile Page
+        profNameEditTxt = findViewById(R.id.profileNameEditText);
+        fnameEditTxt = findViewById(R.id.firstNameEditText);
+        lnameEditTxt = findViewById(R.id.lastNameEditText);
+        walletEditTxt = findViewById(R.id.walletEditText);
+
+        //Defining the buttons in Edit Profile Page
+        updateButton = findViewById(R.id.updateAppCompatButton);
+        cancelButton = findViewById(R.id.cancelAppCompatButton);
+
+        //Fetching existing user information
+        String currUserName = getIntent().getStringExtra("USERNAME");
+        User user = userHelper.getUserByUsername(currUserName);
+        Profile profile = profileHelper.get(user.getUserID());
+
+        String currentProfName = profile.getProfileName();
+        String currentFname = profile.getFname();
+        String currentLname = profile.getLname();
+        String currentWallet = profile.getWallet();
+        profNameEditTxt.setText(profile.getProfileName());
+        fnameEditTxt.setText(profile.getFname());
+        lnameEditTxt.setText(profile.getLname());
+        walletEditTxt.setText(profile.getWallet());
+
+        /*profileImg = findViewById(R.id.profileImg);
+        loadImage(profile.getImageLink(), this, profileImg);*/
+
+
+        updateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Profile profile = new Profile();
+                String profNameVal = profNameEditTxt.getText().toString();
+                String fnameVal = fnameEditTxt.getText().toString();
+                String lnameVal = lnameEditTxt.getText().toString();
+                String walletVal = walletEditTxt.getText().toString();
+
+                if (profNameVal.isEmpty() || fnameVal.isEmpty() || lnameVal.isEmpty() || walletVal.isEmpty()) {
+                    Toast.makeText(EditProfile.this, "Please enter some value(s)", Toast.LENGTH_SHORT).show();
+                } else {
+                    String userID = profile.getUserID();
+                    boolean isUpdated = profileHelper.update(
+                            profNameEditTxt.getText().toString(),
+                            fnameEditTxt.getText().toString(),
+                            lnameEditTxt.getText().toString(),
+                            walletEditTxt.getText().toString(),
+                            userID);
+                    if (isUpdated == true) {
+                        Toast.makeText(getApplicationContext(), "Profile updated ",
+                                Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Profile not updated ",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                    Intent intent = new Intent(getApplicationContext(), profilePage.class);
+                    intent.putExtra("USERNAME", currUserName);
+                    startActivity(intent);
+                }
+            }
+        });
+
+        //This cancel button is used when a user want to undo the new values entered in each user profile info
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                profNameEditTxt.setText(currentProfName);
+                fnameEditTxt.setText(currentFname);
+                lnameEditTxt.setText(currentLname);
+                walletEditTxt.setText(currentWallet);
+            }
+        });
+    }
+}

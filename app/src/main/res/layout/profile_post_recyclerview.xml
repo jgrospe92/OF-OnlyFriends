@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profilePostCImageView"
+        android:layout_width="63dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="96dp"
+        android:src="@drawable/account"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/profileFnameTextView"
+        android:layout_width="79dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="96dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/profilePostCImageView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/profNameTagTextView"
+        android:layout_width="64dp"
+        android:layout_height="23dp"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="178dp"
+        tools:layout_editor_absoluteY="96dp" />
+
+    <TextView
+        android:id="@+id/datePostTextView"
+        android:layout_width="67dp"
+        android:layout_height="23dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="96dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/profNameTagTextView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/postedCommentTextView"
+        android:layout_width="248dp"
+        android:layout_height="93dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="10dp"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@+id/profilePostCImageView"
+        app:layout_constraintTop_toBottomOf="@+id/profNameTagTextView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

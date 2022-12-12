@@ -33,6 +33,17 @@ public class Profile extends Observable {
         this.userID = userID;
     }
 
+    public Profile(String profileName, String fname, String imageLink, String userID){
+
+        this.profileName = profileName;
+        this.fname = fname;
+        this.imageLink = imageLink;
+        this.userID = userID;
+    }
+    public Profile(String fname){
+        this.fname = fname;
+    }
+
 //    GETTERS AND SETTERS
 
 
@@ -219,5 +230,10 @@ public class Profile extends Observable {
         return false;
     }
 
+    public Cursor displaySearchedUser(String firstName){
+        SQLiteDatabase sql = con.getWritableDatabase();
+        Cursor c = sql.rawQuery("SELECT * FROM Profile WHERE UPPER(fName)=? ", new String[] {firstName});
+        return c;
+    }
 
 }
