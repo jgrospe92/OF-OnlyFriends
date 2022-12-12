@@ -29,7 +29,7 @@ public class EditProfile extends AppCompatActivity {
         profNameEditTxt = findViewById(R.id.profileNameEditText);
         fnameEditTxt = findViewById(R.id.firstNameEditText);
         lnameEditTxt = findViewById(R.id.lastNameEditText);
-        walletEditTxt = findViewById(R.id.lastNameEditText);
+        walletEditTxt = findViewById(R.id.walletEditText);
 
         //Defining the buttons in Edit Profile Page
         updateButton = findViewById(R.id.updateAppCompatButton);
@@ -55,11 +55,11 @@ public class EditProfile extends AppCompatActivity {
                 //Profile profile = new Profile();
                 String userID = profile.getUserID();
                 boolean isUpdated =   profileHelper.update(
+                        userID,
                         profNameEditTxt.getText().toString(),
                         fnameEditTxt.getText().toString(),
                         lnameEditTxt.getText().toString(),
-                        walletEditTxt.getText().toString(),
-                        userID);
+                        walletEditTxt.getText().toString());
                 if(isUpdated == true) {
                     Toast.makeText(getApplicationContext(),"Profile updated ",
                             Toast.LENGTH_SHORT).show();
