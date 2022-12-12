@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.models.Profile;
 import com.example.models.User;
+
 
 public class EditProfile extends AppCompatActivity {
     User userHelper;
@@ -33,7 +35,7 @@ public class EditProfile extends AppCompatActivity {
         updateButton = findViewById(R.id.updateAppCompatButton);
         cancelButton = findViewById(R.id.cancelAppCompatButton);
 
-
+        //Fetching existing user information
         String username = getIntent().getStringExtra("USERNAME");
         User user = userHelper.getUserByUsername(username);
         Profile profile = profileHelper.get(user.getUserID());
@@ -51,7 +53,20 @@ public class EditProfile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Profile profile = new Profile();
-
+                String userID = profile.getUserID();
+                boolean isUpdated =   profileHelper.update(
+                        profNameEditTxt.getText().toString(),
+                        fnameEditTxt.getText().toString(),
+                        lnameEditTxt.getText().toString(),
+                        walletEditTxt.getText().toString(),
+                        userID);
+                if(isUpdated == true) {
+                    Toast.makeText(getApplicationContext(),"Profile updated ",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(),"Profile not updated ",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
