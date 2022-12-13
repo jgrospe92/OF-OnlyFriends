@@ -3,6 +3,7 @@ package com.example.myapplication;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.util.Log;
@@ -15,11 +16,13 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -46,7 +49,7 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
 
     private ArrayList<Post> postsData;
     private LayoutInflater mInflater;
-    private SharedPreferences currentUser;
+    private SharedPreferences sharedData;
 
     // CLICK LISTENER
     private ItemClickListener mClickListener;
@@ -58,7 +61,7 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
 
 
     public RVAhome(Context context, ArrayList<Post> postsData, SharedPreferences user) {
-        this.currentUser = user;
+        this.sharedData = user;
         this.postsData = postsData;
         this.mInflater = LayoutInflater.from(context);
     }
@@ -76,6 +79,41 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
         Profile profile = new Profile(mInflater.getContext());
         postHelper = new Post(mInflater.getContext());
         profile = profile.getProfileByID(postsData.get(position).getProfileID());
+        String postid = postsData.get(position).getPostID();
+        // HIDE DELETE BUTTON
+        holder.deleteImageButton.setVisibility(View.INVISIBLE);
+        holder.deleteImageButton.setEnabled(false);
+        Profile currentProfile = new Profile(mInflater.getContext());
+        currentProfile = currentProfile.get(sharedData.getString("userID",""));
+        // ENABLE DELETE POST TO THE POST OWNER
+        if (currentProfile.getProfileID().equals(postsData.get(position).getProfileID())){
+            holder.deleteImageButton.setVisibility(View.VISIBLE);
+            holder.deleteImageButton.setEnabled(true);
+
+            holder.deleteImageButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(view.getContext(), "delete post", Toast.LENGTH_SHORT).show();
+                    
+                    DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
+                        switch (which){
+                            case DialogInterface.BUTTON_POSITIVE:
+                                postHelper.delete(postid);
+                                break;
+
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                //No button clicked
+                                break;
+                        }
+                    };
+                    AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                    builder.setMessage("Are you sure you want to delete your post?").setPositiveButton("Yes", dialogClickListener)
+                            .setNegativeButton("No", dialogClickListener).show();
+                }
+            });
+        }
+
+
 
         holder.tv_profleName.setText(profile.getProfileName());
         holder.tv_firstName.setText(profile.getFname());
@@ -84,7 +122,7 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
         holder.tv_likeCount.setText(String.valueOf(postsData.get(position).getLikes()));
         holder.tv_savedCount.setText(String.valueOf(postsData.get(position).getFavorites()));
         String datePosted = postsData.get(position).getDatePosted();
-        String postid = postsData.get(position).getPostID();
+
         int likeCount = postsData.get(position).getLikes();
         // CALCULATE TIME DIFFERENCES
         holder.tv_datePosted.setText(Helper.getTimeDiff(datePosted));
@@ -177,12 +215,13 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
             @Override
             public void onClick(View view) {
 
+
                 if (TextUtils.isEmpty(comment.getText().toString())){
                     comment.setError("you forgot to write something");
                     return;
                 }
                 Profile profile = new Profile(view.getContext());
-                profile = profile.get(currentUser.getString("userID",""));
+                profile = profile.get(sharedData.getString("userID",""));
                 Comment commentHelper = new Comment(view.getContext());
                 String postCaption = comment.getText().toString();
                 Comment comment = new Comment();
@@ -226,6 +265,7 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
         TextView tv_profleName;
         TextView tv_caption;
         ImageView postImage;
+        ImageButton deleteImageButton;
         TextView tv_replyCount;
         TextView tv_likeCount;
         TextView tv_savedCount;
@@ -238,6 +278,7 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
             tv_profleName = itemView.findViewById(R.id.tv_profleName);
             tv_caption = itemView.findViewById(R.id.tv_caption);
             postImage = itemView.findViewById(R.id.postImage);
+            deleteImageButton = itemView.findViewById(R.id.deleteImageButton);
             tv_replyCount = itemView.findViewById(R.id.tv_replyCount);
             tv_likeCount = itemView.findViewById(R.id.tv_likeCount);
             tv_savedCount = itemView.findViewById(R.id.tv_savedCount);
