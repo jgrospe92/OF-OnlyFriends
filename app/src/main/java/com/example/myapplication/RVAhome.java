@@ -125,7 +125,7 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
 
         if (!postsData.get(position).getImageURL().isEmpty()) {
 
-            GlideUrl postImage = new GlideUrl(postsData.get(position).getImageURL(), new LazyHeaders.Builder()
+            GlideUrl postImage = new GlideUrl(postsData.get(position).getImageURL().trim(), new LazyHeaders.Builder()
                     .addHeader("User-Agent", "image")
                     .build());
             Glide.with(mInflater.getContext())
@@ -133,7 +133,7 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
                     .load(postImage)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .placeholder(R.drawable.defaul_image)
-                    .error(R.drawable.defaul_image)
+                    .error(R.drawable.imagerror)
                     .centerCrop()
                     .into(holder.postImage);
         } else {
@@ -142,7 +142,7 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
                     .load(R.drawable.defaul_image)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .placeholder(R.drawable.defaul_image)
-                    .error(R.drawable.defaul_image)
+                    .error(R.drawable.imagerror)
                     .centerCrop()
                     .into(holder.postImage);
         }

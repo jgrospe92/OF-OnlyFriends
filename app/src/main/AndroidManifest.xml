@@ -20,18 +20,6 @@
             android:name=".Helpmenu"
             android:exported="false" />
         <activity
-            android:name=".EditProfile"
-            android:exported="false" />
-        <activity
-            android:name=".profilePage"
-            android:exported="false" />
-        <activity
-            android:name=".notification"
-            android:exported="false" />
-        <activity
-            android:name=".createPost"
-            android:exported="false" />
-        <activity
             android:name=".home"
             android:exported="false" />
         <activity
