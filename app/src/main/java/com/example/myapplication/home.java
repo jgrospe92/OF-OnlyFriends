@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,6 +39,7 @@ import com.google.android.material.navigation.NavigationView;
 
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -55,7 +57,7 @@ public class home extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
 
-    homefragment homefragment = new homefragment();
+    homefragment homefragment;
     searchFragment searchFragment = new searchFragment();
     NotificationFragmet notificationFragmet = new NotificationFragmet();
     InboxFragment inboxFragment = new InboxFragment();
@@ -75,6 +77,7 @@ public class home extends AppCompatActivity {
 
     // POST DIALOG
     boolean hasImage;
+    ArrayList<Post> posts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +89,9 @@ public class home extends AppCompatActivity {
         // SHARED PREFERENCES
         userData = getSharedPreferences("user", MODE_PRIVATE);
         // POST DIALOG INIT
-
+        postHelper = new Post(getApplicationContext());
+        posts = postHelper.getAllPosts();
+        homefragment = new homefragment(posts);
         // DRAWER STARTS
         my_drawer_layout = findViewById(R.id.my_drawer_layout);
         drawerNav = (NavigationView) findViewById(R.id.nav_drawer);
@@ -129,12 +134,9 @@ public class home extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showPostDialog();
-                Toast.makeText(getApplicationContext(), "Fab click", Toast.LENGTH_SHORT).show();
             }
         });
         // DRAWER ENDS
-
-
 
         User user = userHelper.get(userData.getString("userID",""));
         currentProfile = profileHelper.get(user.getUserID());
@@ -149,7 +151,6 @@ public class home extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.home:
                     getSupportFragmentManager().beginTransaction().replace(R.id.parentFragment, homefragment).commit();
-                    Toast.makeText(getApplicationContext(), "home click", Toast.LENGTH_SHORT).show();
                     return true;
 
                 case R.id.search:
@@ -173,7 +174,13 @@ public class home extends AppCompatActivity {
         });
 
         // DRAWER listener
+    }
 
+    public void reloadPosts(){
+        posts.clear();
+        posts = postHelper.getAllPosts();
+        homefragment = new homefragment(posts);
+        getSupportFragmentManager().beginTransaction().replace(R.id.parentFragment, homefragment).commit();
 
     }
 
@@ -290,8 +297,8 @@ public class home extends AppCompatActivity {
 
                 if(post.insert(post, "")) {
                     Toast.makeText(getApplicationContext(), "Post added", Toast.LENGTH_SHORT).show();
+                    reloadPosts();
                     dialog.dismiss();
-                    // TODO: ADD A FUNCTION TO RELOAD AND FETCH ALL DATA METHOD
                 } else {
                     Toast.makeText(getApplicationContext(), "FAILED TO  CREATE POST", Toast.LENGTH_SHORT).show();
                 }

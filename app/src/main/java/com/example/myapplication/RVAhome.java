@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -35,6 +36,7 @@ import com.example.models.Post;
 import com.example.models.Profile;
 import com.example.models.User;
 
+import java.lang.ref.WeakReference;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -50,6 +52,7 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
     private ArrayList<Post> postsData;
     private LayoutInflater mInflater;
     private SharedPreferences sharedData;
+    private ClickListener listener;
 
     // CLICK LISTENER
     private ItemClickListener mClickListener;
@@ -60,7 +63,8 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
     // CONSTRUCTOR
 
 
-    public RVAhome(Context context, ArrayList<Post> postsData, SharedPreferences user) {
+    public RVAhome(Context context, ArrayList<Post> postsData, SharedPreferences user, ClickListener listener) {
+        this.listener = listener;
         this.sharedData = user;
         this.postsData = postsData;
         this.mInflater = LayoutInflater.from(context);
@@ -69,12 +73,12 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
     @NonNull
     @Override
     public VIewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.home_post_with_image, parent, false);
-        return new VIewHolder(view);
+        return new VIewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.home_post_with_image, parent, false), listener);
+
     }
 
     @Override
-    public void onBindViewHolder(@NonNull VIewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull VIewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         Profile profile = new Profile(mInflater.getContext());
         postHelper = new Post(mInflater.getContext());
@@ -89,28 +93,6 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
         if (currentProfile.getProfileID().equals(postsData.get(position).getProfileID())){
             holder.deleteImageButton.setVisibility(View.VISIBLE);
             holder.deleteImageButton.setEnabled(true);
-
-            holder.deleteImageButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(view.getContext(), "delete post", Toast.LENGTH_SHORT).show();
-                    
-                    DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
-                        switch (which){
-                            case DialogInterface.BUTTON_POSITIVE:
-                                postHelper.delete(postid);
-                                break;
-
-                            case DialogInterface.BUTTON_NEGATIVE:
-                                //No button clicked
-                                break;
-                        }
-                    };
-                    AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-                    builder.setMessage("Are you sure you want to delete your post?").setPositiveButton("Yes", dialogClickListener)
-                            .setNegativeButton("No", dialogClickListener).show();
-                }
-            });
         }
 
 
@@ -254,8 +236,10 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
     public int getItemCount() {
         return postsData.size();
     }
-
+    // View Holder class
     public class VIewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener {
+
+        private WeakReference<ClickListener> listenerRef;
 
         CircleImageView circleImageView;
         ImageView imbView_likes;
@@ -271,7 +255,7 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
         TextView tv_savedCount;
         TextView tv_datePosted;
 
-        public VIewHolder(@NonNull View itemView) {
+        public VIewHolder(@NonNull View itemView, ClickListener listener) {
             super(itemView);
             circleImageView = itemView.findViewById(R.id.circleImageView);
             tv_firstName = itemView.findViewById(R.id.tv_firstName);
@@ -286,7 +270,11 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
             imbView_likes = itemView.findViewById(R.id.imbView_likes);
             imgView_saved = itemView.findViewById(R.id.imgView_saved);
             imgView_replies = itemView.findViewById(R.id.imgView_replies);
-            itemView.setOnClickListener(this);
+            deleteImageButton.setOnClickListener(this);
+            postImage.setOnClickListener(this);
+            listenerRef = new WeakReference<>(listener);
+
+//          itemView.setOnClickListener(this);
 
 
         }
@@ -294,7 +282,9 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
         @Override
         public void onClick(View view) {
             if (mClickListener != null ) mClickListener.onItemClick(view, getAdapterPosition());
+            listenerRef.get().onPositionClicked(getAdapterPosition());
         }
+
     }
 
     // convenience method for getting data at click position
@@ -311,4 +301,5 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
     public interface ItemClickListener {
         void onItemClick(View view, int position);
     }
+
 }

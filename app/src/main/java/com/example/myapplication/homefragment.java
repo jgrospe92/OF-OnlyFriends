@@ -2,9 +2,11 @@ package com.example.myapplication;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.models.Comment;
@@ -33,9 +36,13 @@ public class homefragment extends Fragment implements RVAhome.ItemClickListener 
     RVAhome recycleViewAdapterHome;
     View view;
     SharedPreferences userData;
-    public homefragment() {
+    ArrayList<Post> posts;
+    Post postHelper;
+    public homefragment( ArrayList<Post> posts) {
         // Required empty public constructor
+        this.posts = posts;
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,12 +51,21 @@ public class homefragment extends Fragment implements RVAhome.ItemClickListener 
         // SHARED PREFERENCES
         userData = this.getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
         view = inflater.inflate(R.layout.fragment_homefragment, container, false);
-        ArrayList<Post> posts = new ArrayList<>();
-        Post postHelper = new Post(view.getContext());
+//        posts = new ArrayList<>();
+        postHelper = new Post(view.getContext());
         posts = postHelper.getAllPosts();
         home_recycleView = view.findViewById(R.id.home_recycleView);
         home_recycleView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        recycleViewAdapterHome = new RVAhome(view.getContext(), posts, userData);
+        recycleViewAdapterHome = new RVAhome(view.getContext(), posts, userData, new ClickListener() {
+            @Override
+            public void onPositionClicked(int position) {
+                recycleViewAdapterHome.notifyDataSetChanged();
+            }
+            @Override
+            public void onLongClicked(int position) {
+            }
+        });
+
         home_recycleView.addItemDecoration(new DividerItemDecoration(view.getContext(),
                 DividerItemDecoration.VERTICAL));
         recycleViewAdapterHome.notifyDataSetChanged();
@@ -58,13 +74,30 @@ public class homefragment extends Fragment implements RVAhome.ItemClickListener 
 
         return view;
     }
+    public void deletePost(Post postHelper, int position){
+        DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
+            switch (which){
+                case DialogInterface.BUTTON_POSITIVE:
+                    postHelper.delete(posts.get(position).getPostID());
+                    posts.remove(position);
+                    recycleViewAdapterHome.notifyItemRemoved(position);
+                    break;
+
+                case DialogInterface.BUTTON_NEGATIVE:
+                    //No button clicked
+                    break;
+            }
+        };
+        AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+        builder.setMessage("Are you sure you want to delete your post?").setPositiveButton("Yes", dialogClickListener)
+                .setNegativeButton("No", dialogClickListener).show();
+    }
 
     @Override
     public void onResume() {
         super.onResume();
-
-
     }
+
     // METHOD TO OPEN SHOW COMMENT DIALOG
     private void showCommentSectionDialog(int position){
         Comment commentHelper = new Comment(view.getContext());
@@ -89,7 +122,13 @@ public class homefragment extends Fragment implements RVAhome.ItemClickListener 
     @Override
     public void onItemClick(View view, int position) {
         // TODO display all comments
-        showCommentSectionDialog(position);
-        recycleViewAdapterHome.notifyItemChanged(position);
+        if(view.getId() == R.id.postImage){
+            showCommentSectionDialog(position);
+        }
+        if(view.getId() == R.id.deleteImageButton){
+            deletePost(postHelper, position);
+        }
+
     }
+
 }

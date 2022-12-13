@@ -244,10 +244,10 @@ public class Post extends Observable {
     }
 
     // DELETE POST
-    public boolean delete(String profileID) {
+    public boolean delete(String postid) {
         SQLiteDatabase sql = con.getWritableDatabase();
         try {
-            return sql.delete("post", "postID = ?", new String[]{profileID}) > 0;
+            return sql.delete("post", "postID = ?", new String[]{postid}) > 0;
         } catch (Exception e) {
             Log.e("ERROR MESSAGE: ", e.getMessage());
         } finally {
