@@ -103,7 +103,8 @@ public class home extends AppCompatActivity {
                 my_drawer_layout.closeDrawer(GravityCompat.START);
                 switch (id) {
                     case R.id.nav_profile:
-                        Toast.makeText(getApplicationContext(), "Profile clicked", Toast.LENGTH_SHORT).show();break;
+                        switchActivity(UserProfile.class);
+                        break;
                     case R.id.nav_likes:
                         Toast.makeText(getApplicationContext(), "likes clicked", Toast.LENGTH_SHORT).show();break;
                     case  R.id.nav_secrets:
@@ -176,6 +177,16 @@ public class home extends AppCompatActivity {
         // DRAWER listener
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        currentProfile = profileHelper.get(userData.getString("userID",""));
+        profileImage = findViewById(R.id.profileImage);
+        loadImage(currentProfile.getImageLink(), this, profileImage);
+        reloadNavProfile(currentProfile);
+        reloadPosts();
+    }
+
     public void reloadPosts(){
         posts.clear();
         posts = postHelper.getAllPosts();
@@ -224,6 +235,31 @@ public class home extends AppCompatActivity {
 
     private String capitalizeFirstLetter(String str){
         return str.substring(0, 1).toUpperCase() + str.substring(1);
+    }
+
+    public void reloadNavProfile(Profile profile){
+        View headerView = drawerNav.getHeaderView(0);
+        navFname = (TextView) headerView.findViewById(R.id.navFname);
+        navProfileName = (TextView) headerView.findViewById(R.id.navProfileName);
+        navFollowerNum = (TextView) headerView.findViewById(R.id.followerNum);
+        navFollowingNum = (TextView) headerView.findViewById(R.id.followingNum);
+        navSubscriberNum = (TextView) headerView.findViewById(R.id.subscriberNum);
+        navSubscribedNum = (TextView) headerView.findViewById(R.id.subscribedNum);
+
+        String firstName = capitalizeFirstLetter(profile.getFname());
+        String profileName = "@" + profile.getProfileName();
+        // TODO: a profile method to retrieve these data
+        String followerNum = "0";
+        String followingNum = "0";
+        String subscriberNum = "0";
+        String subscribedNum = "0";
+
+        navFname.setText(firstName);
+        navProfileName.setText(profileName);
+        navFollowerNum.setText(followerNum);
+        navFollowingNum.setText(followingNum);
+        navSubscriberNum.setText(subscriberNum);
+        navSubscribedNum.setText(subscribedNum);
     }
 
     private void initProfile(Profile profile){

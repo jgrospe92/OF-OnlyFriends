@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,7 +40,7 @@ public class register extends AppCompatActivity {
         et_confirmPassword = findViewById(R.id.et_confirmPassword);
 
         btn_save = findViewById(R.id.btn_save);
-        btn_cancel =findViewById(R.id.btn_cancel);
+        btn_cancel =findViewById(R.id.btn_edit);
 
 
     }

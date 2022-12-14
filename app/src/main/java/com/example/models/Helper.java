@@ -22,6 +22,13 @@ public class Helper {
         return false;
     }
 
+    public static boolean checkInputImage(EditText editText){
+        if (!TextUtils.isEmpty(editText.getText().toString())){
+            return  true;
+        }
+        return false;
+    }
+
     public static boolean checkValidEmail(EditText editText, String msg){
         String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
         Pattern pattern = Pattern.compile(regex);

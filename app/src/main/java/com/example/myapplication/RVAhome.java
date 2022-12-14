@@ -4,18 +4,13 @@ package com.example.myapplication;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -23,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -34,16 +28,9 @@ import com.example.models.Comment;
 import com.example.models.Helper;
 import com.example.models.Post;
 import com.example.models.Profile;
-import com.example.models.User;
 
 import java.lang.ref.WeakReference;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -257,7 +244,7 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
 
         public VIewHolder(@NonNull View itemView, ClickListener listener) {
             super(itemView);
-            circleImageView = itemView.findViewById(R.id.circleImageView);
+            circleImageView = itemView.findViewById(R.id.profileCircleImage);
             tv_firstName = itemView.findViewById(R.id.tv_firstName);
             tv_profleName = itemView.findViewById(R.id.tv_profleName);
             tv_caption = itemView.findViewById(R.id.tv_caption);

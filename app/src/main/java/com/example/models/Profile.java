@@ -201,15 +201,16 @@ public class Profile extends Observable {
         return null;
     }
     
-    public boolean update(String profileName, String fname, String lname, String wallet, String userID){
+    public boolean update(Profile profile){
         SQLiteDatabase db = con.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("profileName", profileName);
-        contentValues.put("fname", fname);
-        contentValues.put("lname", lname);
-        contentValues.put("wallet", wallet);
+        contentValues.put("profileName", profile.getProfileName());
+        contentValues.put("fname", profile.getFname());
+        contentValues.put("lname", profile.getLname());
+        contentValues.put("wallet", profile.getWallet());
+        contentValues.put("imageLink", profile.getImageLink());
         try {
-            db.update("Profile",contentValues, " userID = ? ", new String[] {userID});
+            db.update("profile",contentValues, " profileID = ? ", new String[] {profile.profileID});
             return true;
         } catch (Exception e){
             Log.e("ERROR MESSAGE: ", e.getMessage());
@@ -219,5 +220,18 @@ public class Profile extends Observable {
         return false;
     }
 
-
+    @Override
+    public String toString() {
+        return "Profile{" +
+                "profileID='" + profileID + '\'' +
+                ", profileName='" + profileName + '\'' +
+                ", fname='" + fname + '\'' +
+                ", lname='" + lname + '\'' +
+                ", wallet='" + wallet + '\'' +
+                ", imageLink='" + imageLink + '\'' +
+                ", userID='" + userID + '\'' +
+                ", isFollowed=" + isFollowed +
+                ", isSubscribed=" + isSubscribed +
+                '}';
+    }
 }

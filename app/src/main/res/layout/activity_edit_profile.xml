@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".register">
+    tools:context=".EditProfile"
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="89dp"
         app:srcCompat="@drawable/only_fans_logo" />
 
     <TextView
@@ -19,19 +19,17 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginBottom="20dp"
-        android:text="Username"
+        android:text="Profile Name"
         android:textSize="16sp" />
 
     <EditText
-        android:id="@+id/et_username"
+        android:id="@+id/et_profileName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:background="@drawable/layout_bg"
-        android:drawableStart="@drawable/ic_baseline_person_outline_24"
-        android:drawablePadding="10dp"
-        android:padding="10dp"
+        android:padding="15dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:layout_marginBottom="15dp"
@@ -41,82 +39,80 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Email"
+        android:hint="First Name"
         android:layout_marginStart="30dp"
         android:layout_marginBottom="5dp"
         android:textSize="16sp" />
 
     <EditText
-        android:id="@+id/et_email"
+        android:id="@+id/et_fname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:background="@drawable/layout_bg"
-        android:drawableStart="@drawable/ic_baseline_email_24"
-        android:drawablePadding="10dp"
-        android:padding="10dp"
+        android:padding="15dp"
         android:ems="10"
-        android:inputType="textEmailAddress"
+        android:inputType="textPersonName"
         android:layout_marginBottom="15dp"
-        android:hint="Enter Email address" />
+        android:hint="Enter First Name" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Password"
+        android:hint="Last Name"
         android:layout_marginStart="30dp"
         android:layout_marginBottom="5dp"
         android:textSize="16sp" />
 
     <EditText
-        android:id="@+id/et_password"
+        android:id="@+id/et_lname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:background="@drawable/layout_bg"
-        android:drawableStart="@drawable/ic_baseline_lock_open_24"
-        android:drawablePadding="10dp"
-        android:padding="10dp"
+        android:padding="15dp"
         android:ems="10"
-        android:inputType="textPassword"
+        android:inputType="text"
         android:layout_marginBottom="15dp"
-        android:hint="Enter Password" />
+        android:hint="Enter Last Name" />
+
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Confirm Password"
+        android:hint="Image URL"
         android:layout_marginStart="30dp"
         android:layout_marginBottom="5dp"
         android:textSize="16sp" />
 
     <EditText
-        android:id="@+id/et_confirmPassword"
+        android:id="@+id/et_imageLink"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
         android:background="@drawable/layout_bg"
-        android:drawableStart="@drawable/ic_baseline_lock_open_24"
+        android:drawableStart="@drawable/ic_baseline_person_outline_24"
         android:drawablePadding="10dp"
         android:padding="10dp"
         android:ems="10"
-        android:inputType="textPassword"
-        android:layout_marginBottom="15dp"
-        android:hint="Confirm Password" />
+        android:inputType="text"
+        android:layout_marginBottom="5dp"
+        android:hint="Enter image URL" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_save"
+        android:id="@+id/btn_update"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/layout_blue_btn"
-        android:onClick="saveUser"
-        android:text="SAVE" />
+        android:onClick="UpdateProfile"
+        android:text="UPDATE" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_edit"
@@ -124,6 +120,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@drawable/layout_orange_btn"
-        android:onClick="cancelUser"
+        android:onClick="cancelBTN"
         android:text="CANCEL" />
+
 </LinearLayout>
