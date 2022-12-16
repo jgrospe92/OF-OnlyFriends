@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,6 +12,9 @@
 
 
     <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -21,21 +25,21 @@
             android:layout_height="wrap_content"
             android:background="@drawable/layout_bg"
             android:ems="5"
-            android:hint="Search user profilename or fname"
+            android:hint="Search user"
             android:inputType="textPersonName"
             android:padding="15dp"
             android:textColorHint="#757575"
             tools:ignore="TextContrastCheck" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CREATE"
-         
-           />
+            android:background="@drawable/layout_blue_btn"
+            android:text="SEARCH"/>
 
     </LinearLayout>
+
     <TextView
         android:id="@+id/textViewNoResultFound"
         android:layout_width="wrap_content"

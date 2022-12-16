@@ -46,7 +46,7 @@ public class searchFragment extends Fragment {
         btn_search = view.findViewById(R.id.btn_search);
         textViewNoResultFound = view.findViewById(R.id.textViewNoResultFound);
         textViewNoResultFound.setVisibility(View.GONE);
-        btn_search.setText("");
+        searchEditText.setText("");
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
