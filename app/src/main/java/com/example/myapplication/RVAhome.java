@@ -96,7 +96,6 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
         holder.tv_savedCount.setText(String.valueOf(postsData.get(position).getFavorites()));
         String datePosted = postsData.get(position).getDatePosted();
 
-        int likeCount = postsData.get(position).getLikes();
         // CALCULATE TIME DIFFERENCES
         holder.tv_datePosted.setText(Helper.getTimeDiff(datePosted));
 
@@ -142,8 +141,7 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
         holder.imbView_likes.setOnClickListener(view -> {
             Post post = postHelper.get(postid);
             Notification notification = new Notification();
-
-            if (notifHelper.checkIfAlreadyLiked(currentProfile.getProfileID())){
+            if (notifHelper.checkIfAlreadyLiked(currentProfile.getProfileID(), "liked")){
                 // IF POST IS ALREADY LIKED UNLIKE IT.
                 Post p = postHelper.get(postsData.get(position).getPostID());
                 int i = p.getLikes();
@@ -166,24 +164,36 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
                 notification.setCurrentProfileId(currentProfile.getProfileID()); // profile who liked the post
                 notifHelper.insert(notification);
             }
-
-
-
-
         });
-
         holder.imgView_saved.setOnClickListener(view -> {
             Post post = postHelper.get(postid);
-            int i = post.getFavorites();
-            ++i;
-            holder.tv_savedCount.setText(String.valueOf(i));
-            post.setFavorites(i);
-            updatePost(post);
+            Notification notification = new Notification();
+            if (notifHelper.checkIfAlreadySaved(currentProfile.getProfileID(), "saved")) {
+                // IF POST IS ALREADY SAVED, UNSAVED IT.
+                Post p = postHelper.get(postsData.get(position).getPostID());
+                int i = p.getFavorites();
+                post.setFavorites(--i);
+                updatePost(post);
+                holder.tv_savedCount.setText(String.valueOf(post.getFavorites()));
+                notification = notifHelper.getNotifByCurrentProfile(currentProfile.getProfileID());
+                notifHelper.delete(notification.getNotifID());
+
+            } else {
+                Post p = postHelper.get(postsData.get(position).getPostID());
+                int i = p.getFavorites();
+                post.setFavorites(++i);
+                updatePost(post);
+                holder.tv_savedCount.setText(String.valueOf(post.getFavorites()));
+                notification.setDescription("saved");
+                notification.setProfileID(profile.getProfileID()); // post owner profileID
+                notification.setPostID(postsData.get(position).getPostID());
+                notification.setCurrentProfileId(currentProfile.getProfileID()); // profile who liked the post
+                notifHelper.insert(notification);
+            }
         });
 
         holder.imgView_replies.setOnClickListener(view -> {
             showCommentDialog(postid, holder, position);
-
         });
 
     }
