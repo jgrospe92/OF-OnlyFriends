@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.Observable;
 
 public class Profile extends Observable {
@@ -166,6 +167,41 @@ public class Profile extends Observable {
         } catch (Exception e) {
             Log.e("ERROR MESSAGE: ", e.getMessage());
 
+        } finally {
+            sql.close();
+        }
+        return null;
+    }
+
+    // GET PROFILE USING KEYWORD
+    public ArrayList<Profile> getProfilesByKeyword(String word){
+        SQLiteDatabase sql = con.getWritableDatabase();
+        ArrayList<Profile> profiles = new ArrayList<>();
+        try {
+            String keyword = word.trim(); // Removes any whitespace
+            Cursor c =  sql.rawQuery("SELECT * FROM profile WHERE profileName LIKE  ? OR fname LIKE ?", new String[] {"%" + keyword + "%", "%" + keyword + "%"});
+            if (c.moveToFirst()){
+              do {
+                  int profileID = c.getInt(0);
+                  String profileName = c.getString(1);
+                  String fname = c.getString(2);
+                  String lname = c.getString(3);
+                  int isFollowed = c.getInt(4);
+                  int isSubscribed = c.getInt(5);
+                  String wallet = c.getString(6);
+                  String imageLink = c.getString(7);
+                  String userID = c.getString(8);
+                  Profile profile = new Profile(profileName, fname,lname,isFollowed,isSubscribed,wallet,imageLink,userID);
+                  profile.setProfileID(String.valueOf(profileID));
+                  profiles.add(profile);
+              } while(c.moveToNext());
+              c.close();
+              return  profiles;
+            }
+            c.close();
+            return null;
+        } catch (Exception e) {
+            Log.e("ERROR MESSAGE: ", e.getMessage());
         } finally {
             sql.close();
         }

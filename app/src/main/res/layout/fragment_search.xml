@@ -1,15 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_blue"
+    android:orientation="vertical"
+    android:paddingTop="10dp"
     tools:context=".searchFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/searchEditText"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/layout_bg"
+            android:ems="5"
+            android:hint="Search user profilename or fname"
+            android:inputType="textPersonName"
+            android:padding="15dp"
+            android:textColorHint="#757575"
+            tools:ignore="TextContrastCheck" />
+
+        <Button
+            android:id="@+id/btn_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CREATE"
+         
+           />
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/textViewNoResultFound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NO RESULT FOUND"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:textColor="@color/dark_orange"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/searchRecycleView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

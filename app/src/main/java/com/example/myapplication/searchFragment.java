@@ -3,19 +3,32 @@ package com.example.myapplication;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link searchFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.example.models.Helper;
+import com.example.models.Profile;
+
+import java.util.ArrayList;
+
 public class searchFragment extends Fragment {
 
 
+    EditText searchEditText;
+    TextView textViewNoResultFound;
+    ArrayList<Profile> profiles;
+    RecyclerView searchRecycleView;
+    Button btn_search;
+    View view;
 
     public searchFragment() {
         // Required empty public constructor
@@ -26,6 +39,38 @@ public class searchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        Profile profileHelper = new Profile(getContext());
+        view = inflater.inflate(R.layout.fragment_search, container, false);
+        searchRecycleView = view.findViewById(R.id.searchRecycleView);
+        searchEditText = view.findViewById(R.id.searchEditText);
+        btn_search = view.findViewById(R.id.btn_search);
+        textViewNoResultFound = view.findViewById(R.id.textViewNoResultFound);
+        textViewNoResultFound.setVisibility(View.GONE);
+        btn_search.setText("");
+        btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String word = searchEditText.getText().toString();
+                if (Helper.checkInputImage(searchEditText)){
+                    profiles = profileHelper.getProfilesByKeyword(word);
+                    if (profiles == null){
+                        textViewNoResultFound.setVisibility(View.VISIBLE);
+
+                    } else {
+                        textViewNoResultFound.setVisibility(View.GONE);
+                    }
+                    searchRecycleView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+                    RVAsearch searchAdapter = new RVAsearch(view.getContext(), profiles);
+                    searchRecycleView.addItemDecoration(new DividerItemDecoration(view.getContext(),
+                            DividerItemDecoration.VERTICAL));
+                    searchRecycleView.setAdapter(searchAdapter);
+                } else {
+                    Toast.makeText(getContext(), "Please search by profile name or first name", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        return view;
     }
+
 }
