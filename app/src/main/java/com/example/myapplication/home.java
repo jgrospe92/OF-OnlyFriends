@@ -70,7 +70,7 @@ public class home extends AppCompatActivity {
 
     // DRAWER ITEMS
     TextView navFname, navProfileName, navSubscribedNum, navSubscriberNum,
-            navFollowingNum, navFollowerNum;
+            navFollowingNum, navFollowerNum, noPostTextView;
 
     // SHARED PREF
     SharedPreferences userData;
@@ -78,6 +78,7 @@ public class home extends AppCompatActivity {
     // POST DIALOG
     boolean hasImage;
     ArrayList<Post> posts;
+    ArrayList<Post> checkPost = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,13 +89,18 @@ public class home extends AppCompatActivity {
 //        welcomeText = findViewById(R.id.welcomeText);
         // SHARED PREFERENCES
         userData = getSharedPreferences("user", MODE_PRIVATE);
+        // HIDE NO POST WARNING
+        noPostTextView = findViewById(R.id.noPostTextView);
+        noPostTextView.setVisibility(View.GONE);
         // POST DIALOG INIT
         postHelper = new Post(getApplicationContext());
         posts = postHelper.getAllPosts();
-        homefragment = new homefragment(posts);
+        checkIfPostExists();
+        homefragment = new homefragment(posts, noPostTextView);
         // DRAWER STARTS
         my_drawer_layout = findViewById(R.id.my_drawer_layout);
         drawerNav = (NavigationView) findViewById(R.id.nav_drawer);
+
 
         drawerNav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -152,12 +158,11 @@ public class home extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.home:
                     getSupportFragmentManager().beginTransaction().replace(R.id.parentFragment, homefragment).commit();
+                    checkIfPostExists();
                     return true;
 
                 case R.id.search:
                     getSupportFragmentManager().beginTransaction().replace(R.id.parentFragment, searchFragment).commit();
-                    Toast.makeText(getApplicationContext(), "search click", Toast.LENGTH_SHORT).show();
-
                     break;
 
                 case R.id.notif:
@@ -167,7 +172,7 @@ public class home extends AppCompatActivity {
 
                 case R.id.inbox:
                     getSupportFragmentManager().beginTransaction().replace(R.id.parentFragment, inboxFragment).commit();
-                    Toast.makeText(getApplicationContext(), "notif click", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "inbox click", Toast.LENGTH_SHORT).show();
                     break;
 
             }
@@ -185,12 +190,24 @@ public class home extends AppCompatActivity {
         loadImage(currentProfile.getImageLink(), this, profileImage);
         reloadNavProfile(currentProfile);
         reloadPosts();
+        checkIfPostExists();
+    }
+
+    public void checkIfPostExists(){
+        checkPost = postHelper.getAllPosts();
+        if (checkPost.isEmpty()) {
+            // IF NO POST, SET NO POST WARNING TO TRUE
+            noPostTextView.setVisibility(View.VISIBLE);
+        } else {
+            noPostTextView.setVisibility(View.GONE);
+        }
+        checkPost = null;
     }
 
     public void reloadPosts(){
         posts.clear();
         posts = postHelper.getAllPosts();
-        homefragment = new homefragment(posts);
+        homefragment = new homefragment(posts, noPostTextView);
         getSupportFragmentManager().beginTransaction().replace(R.id.parentFragment, homefragment).commit();
 
     }
@@ -334,6 +351,7 @@ public class home extends AppCompatActivity {
                 if(post.insert(post, "")) {
                     Toast.makeText(getApplicationContext(), "Post added", Toast.LENGTH_SHORT).show();
                     reloadPosts();
+                    checkIfPostExists();
                     dialog.dismiss();
                 } else {
                     Toast.makeText(getApplicationContext(), "FAILED TO  CREATE POST", Toast.LENGTH_SHORT).show();

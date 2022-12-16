@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.models.Comment;
@@ -38,9 +39,12 @@ public class homefragment extends Fragment implements RVAhome.ItemClickListener 
     SharedPreferences userData;
     ArrayList<Post> posts;
     Post postHelper;
-    public homefragment( ArrayList<Post> posts) {
+    TextView noPostTextView;
+    ArrayList<Post> checkPost = new ArrayList<>();
+    public homefragment(ArrayList<Post> posts, TextView noPostTextView) {
         // Required empty public constructor
         this.posts = posts;
+        this.noPostTextView = noPostTextView;
     }
 
 
@@ -74,6 +78,16 @@ public class homefragment extends Fragment implements RVAhome.ItemClickListener 
 
         return view;
     }
+    public void checkIfPostExists(){
+        checkPost = postHelper.getAllPosts();
+        if (checkPost.isEmpty()) {
+            // IF NO POST, SET NO POST WARNING TO TRUE
+            noPostTextView.setVisibility(View.VISIBLE);
+        } else {
+            noPostTextView.setVisibility(View.GONE);
+        }
+        checkPost = null;
+    }
     public void deletePost(Post postHelper, int position){
         DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
             switch (which){
@@ -81,6 +95,7 @@ public class homefragment extends Fragment implements RVAhome.ItemClickListener 
                     postHelper.delete(posts.get(position).getPostID());
                     posts.remove(position);
                     recycleViewAdapterHome.notifyItemRemoved(position);
+                    checkIfPostExists();
                     break;
 
                 case DialogInterface.BUTTON_NEGATIVE:

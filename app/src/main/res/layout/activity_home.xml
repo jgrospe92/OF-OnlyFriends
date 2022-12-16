@@ -39,6 +39,7 @@
         </LinearLayout>
     </LinearLayout>
 
+
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/my_drawer_layout"
         android:layout_width="match_parent"
@@ -47,6 +48,15 @@
 
         <!-- this the navigation view which draws and shows the navigation drawer -->
         <!-- include the menu created in the menu folder -->
+        <TextView
+            android:id="@+id/noPostTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="uh oh! This place is dry, Post something"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/dark_orange"/>
+
         <FrameLayout
             android:id="@+id/parentFragment"
             android:layout_width="match_parent"
