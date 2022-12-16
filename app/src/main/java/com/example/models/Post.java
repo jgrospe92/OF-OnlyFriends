@@ -220,8 +220,6 @@ public class Post extends Observable {
 
     public Post get(String postID) {
         SQLiteDatabase sql = con.getWritableDatabase();
-        Post post = new Post();
-
         try {
             Cursor c = sql.rawQuery("SELECT * FROM post WHERE postID =?", new String[]{postID});
             c.moveToFirst();

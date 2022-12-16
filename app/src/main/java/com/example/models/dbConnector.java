@@ -45,6 +45,8 @@ public class dbConnector extends SQLiteOpenHelper {
         db.execSQL("create table post (postID integer primary key autoincrement, caption text, datePosted text, likes integer , favorites integer , imageURL varchar, profileID integer, foreign key (profileID) references profile (profileID) on delete cascade)");
 //      COMMENT TABLE
         db.execSQL("create table comment (commentID integer primary key autoincrement, caption text, datePosted text, profileID integer, postID integer, foreign key (profileID) references profile (profileID) on delete cascade, foreign key (postID) references post (postID) on delete cascade)");
+//      NOTIFICATION TABLE
+        db.execSQL("create table notification (notifID integer primary key autoincrement, description varchar, profileID integer, postID integer, currentProfileId integer, foreign key (profileID) references profile (profileID) on delete cascade, foreign key (postID) references post (postID) on delete cascade, foreign key (currentProfileId) references profile (profileID) on delete cascade)");
 
 
     }

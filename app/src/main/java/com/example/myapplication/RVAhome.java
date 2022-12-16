@@ -26,6 +26,7 @@ import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.model.LazyHeaders;
 import com.example.models.Comment;
 import com.example.models.Helper;
+import com.example.models.Notification;
 import com.example.models.Post;
 import com.example.models.Profile;
 
@@ -40,10 +41,14 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
     private LayoutInflater mInflater;
     private SharedPreferences sharedData;
     private ClickListener listener;
+    Profile profile;
+    Profile currentProfile;
 
+    Notification notifHelper;
+    Post postHelper;
     // CLICK LISTENER
     private ItemClickListener mClickListener;
-    Post postHelper;
+
 //    private final View.OnClickListener mOnClickListener = new
 
 
@@ -67,22 +72,21 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
     @Override
     public void onBindViewHolder(@NonNull VIewHolder holder, @SuppressLint("RecyclerView") int position) {
 
-        Profile profile = new Profile(mInflater.getContext());
+        profile = new Profile(mInflater.getContext());
         postHelper = new Post(mInflater.getContext());
+        notifHelper = new Notification(mInflater.getContext());
         profile = profile.getProfileByID(postsData.get(position).getProfileID());
         String postid = postsData.get(position).getPostID();
         // HIDE DELETE BUTTON
         holder.deleteImageButton.setVisibility(View.INVISIBLE);
         holder.deleteImageButton.setEnabled(false);
-        Profile currentProfile = new Profile(mInflater.getContext());
+        currentProfile = new Profile(mInflater.getContext());
         currentProfile = currentProfile.get(sharedData.getString("userID",""));
         // ENABLE DELETE POST TO THE POST OWNER
         if (currentProfile.getProfileID().equals(postsData.get(position).getProfileID())){
             holder.deleteImageButton.setVisibility(View.VISIBLE);
             holder.deleteImageButton.setEnabled(true);
         }
-
-
 
         holder.tv_profleName.setText(profile.getProfileName());
         holder.tv_firstName.setText(profile.getFname());
@@ -137,11 +141,35 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
 
         holder.imbView_likes.setOnClickListener(view -> {
             Post post = postHelper.get(postid);
-            int i = likeCount;
-            ++i;
-            holder.tv_likeCount.setText(String.valueOf(i));
-            post.setLikes(i);
-            updatePost(post);
+            Notification notification = new Notification();
+
+            if (notifHelper.checkIfAlreadyLiked(currentProfile.getProfileID())){
+                // IF POST IS ALREADY LIKED UNLIKE IT.
+                Post p = postHelper.get(postsData.get(position).getPostID());
+                int i = p.getLikes();
+                post.setLikes(--i);
+                updatePost(post);
+                holder.tv_likeCount.setText(String.valueOf(post.getLikes()));
+                notification = notifHelper.getNotifByCurrentProfile(currentProfile.getProfileID());
+                notifHelper.delete(notification.getNotifID());
+
+            } else {
+                // IF POST IS NOT LIKED
+                Post p = postHelper.get(postsData.get(position).getPostID());
+                int i = p.getLikes();
+                post.setLikes(++i);
+                updatePost(post);
+                holder.tv_likeCount.setText(String.valueOf(post.getLikes()));
+                notification.setDescription("liked");
+                notification.setProfileID(profile.getProfileID()); // post owner profileID
+                notification.setPostID(postsData.get(position).getPostID());
+                notification.setCurrentProfileId(currentProfile.getProfileID()); // profile who liked the post
+                notifHelper.insert(notification);
+            }
+
+
+
+
         });
 
         holder.imgView_saved.setOnClickListener(view -> {
