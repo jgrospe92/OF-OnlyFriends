@@ -65,7 +65,7 @@ public class RVAnotification extends RecyclerView.Adapter<RVAnotification.ViewHo
             String profileName = profile.getProfileName();
             String userAction = notifications.get(position).getDescription();
             holder.firstNameTextView.setText(profileName);
-            String message = userAction + " post";
+            String message = userAction + " your post";
             holder.messageNotif.setText(message);
 
         }

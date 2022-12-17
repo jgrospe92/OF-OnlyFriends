@@ -73,6 +73,9 @@ public class NotificationFragmet extends Fragment implements  RVAnotification.It
 
     @Override
     public void onItemClick(View view, int position) {
+        Notification notification = notificationAdapter.getItem(position);
+        notifiHelper.delete(notification.getNotifID());
         removeSingleItem(position);
+
     }
 }

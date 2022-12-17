@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -139,15 +140,14 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
 
 
         holder.imbView_likes.setOnClickListener(view -> {
-            Post post = postHelper.get(postid);
             Notification notification = new Notification();
-            if (notifHelper.checkIfAlreadyLiked(currentProfile.getProfileID(), "liked")){
+            if (notifHelper.checkIfAlreadyLiked(currentProfile.getProfileID(), "liked", postsData.get(position).getPostID())){
                 // IF POST IS ALREADY LIKED UNLIKE IT.
                 Post p = postHelper.get(postsData.get(position).getPostID());
                 int i = p.getLikes();
-                post.setLikes(--i);
-                updatePost(post);
-                holder.tv_likeCount.setText(String.valueOf(post.getLikes()));
+                p.setLikes(--i);
+                updatePost(p);
+                holder.tv_likeCount.setText(String.valueOf(p.getLikes()));
                 notification = notifHelper.getNotifByCurrentProfile(currentProfile.getProfileID());
                 notifHelper.delete(notification.getNotifID());
 
@@ -155,9 +155,9 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
                 // IF POST IS NOT LIKED
                 Post p = postHelper.get(postsData.get(position).getPostID());
                 int i = p.getLikes();
-                post.setLikes(++i);
-                updatePost(post);
-                holder.tv_likeCount.setText(String.valueOf(post.getLikes()));
+                p.setLikes(++i);
+                updatePost(p);
+                holder.tv_likeCount.setText(String.valueOf(p.getLikes()));
                 notification.setDescription("liked");
                 notification.setProfileID(profile.getProfileID()); // post owner profileID
                 notification.setPostID(postsData.get(position).getPostID());
@@ -166,25 +166,24 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
             }
         });
         holder.imgView_saved.setOnClickListener(view -> {
-            Post post = postHelper.get(postid);
             Notification notification = new Notification();
 
-            if (notifHelper.checkIfAlreadySaved(currentProfile.getProfileID(), "saved")) {
+            if (notifHelper.checkIfAlreadySaved(currentProfile.getProfileID(), "saved", postsData.get(position).getPostID())) {
                 // IF POST IS ALREADY SAVED, UNSAVED IT.
                 Post p = postHelper.get(postsData.get(position).getPostID());
                 int i = p.getFavorites();
-                post.setFavorites(--i);
-                updatePost(post);
-                holder.tv_savedCount.setText(String.valueOf(post.getFavorites()));
+                p.setFavorites(--i);
+                updatePost(p);
+                holder.tv_savedCount.setText(String.valueOf(p.getFavorites()));
                 notification = notifHelper.getNotifByCurrentProfile(currentProfile.getProfileID());
                 notifHelper.delete(notification.getNotifID());
 
             } else {
                 Post p = postHelper.get(postsData.get(position).getPostID());
                 int i = p.getFavorites();
-                post.setFavorites(++i);
-                updatePost(post);
-                holder.tv_savedCount.setText(String.valueOf(post.getFavorites()));
+                p.setFavorites(++i);
+                updatePost(p);
+                holder.tv_savedCount.setText(String.valueOf(p.getFavorites()));
                 notification.setDescription("saved");
                 notification.setProfileID(profile.getProfileID()); // post owner profileID
                 notification.setPostID(postsData.get(position).getPostID());

@@ -113,11 +113,11 @@ public class Notification {
     }
 
 
-    public boolean checkIfAlreadyLiked(String profileID, String description){
+    public boolean checkIfAlreadyLiked(String profileID, String description, String postID){
         SQLiteDatabase sql = con.getWritableDatabase();
 
         try {
-            Cursor c = sql.rawQuery("SELECT * FROM notification WHERE currentProfileId = ? AND description = ?", new String[]{profileID, description});
+            Cursor c = sql.rawQuery("SELECT * FROM notification WHERE currentProfileId = ? AND description = ? AND postID = ?", new String[]{profileID, description, postID});
             if (c.moveToFirst()){
                 c.close();
                 return true;
@@ -134,11 +134,11 @@ public class Notification {
         return false;
     }
 
-    public boolean checkIfAlreadySaved(String profileID, String description){
+    public boolean checkIfAlreadySaved(String profileID, String description, String postID){
         SQLiteDatabase sql = con.getWritableDatabase();
 
         try {
-            Cursor c = sql.rawQuery("SELECT * FROM notification WHERE currentProfileId = ? AND description = ?", new String[]{profileID, description});
+            Cursor c = sql.rawQuery("SELECT * FROM notification WHERE currentProfileId = ? AND description = ? AND postID = ?", new String[]{profileID, description, postID});
             if (c.moveToFirst()){
                 c.close();
                 return true;
