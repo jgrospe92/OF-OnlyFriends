@@ -15,6 +15,7 @@
 
     <item
         android:id="@+id/nav_secrets"
+        android:visible="false"
         android:icon="@drawable/ic_baseline_insert_emoticon_24"
         android:title="Secret" />
 
