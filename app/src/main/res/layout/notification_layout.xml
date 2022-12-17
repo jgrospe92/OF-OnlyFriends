@@ -29,13 +29,5 @@
         android:layout_marginTop="20dp"
         android:text="liked your post"/>
 
-    <ImageButton
-        android:id="@+id/deleteImageButtonNotif"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:translationX="50dp"
-        android:layout_gravity="center"
-
-        app:srcCompat="@drawable/delete" />
 
 </LinearLayout>

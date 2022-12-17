@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 public class Notification {
 
     private String notifID;
@@ -151,6 +153,31 @@ public class Notification {
             sql.close();
         }
         return false;
+    }
+
+    public ArrayList<Notification> getAll(String profileID){
+
+        SQLiteDatabase sql = con.getWritableDatabase();
+        ArrayList<Notification> notifications = new ArrayList<>();
+        // opens a cursor
+        Cursor c = sql.rawQuery("SELECT * FROM notification WHERE profileID = ? ORDER by notifID desc", new String[]{profileID});
+        if (c.moveToFirst()) {
+            do {
+                Notification n = new Notification();
+                n.setNotifID(c.getString(0));
+                n.setDescription(c.getString(1));
+                n.setProfileID(c.getString(2));
+                n.setPostID(c.getString(3));
+                n.setCurrentProfileId(c.getString(4));
+                notifications.add(n);
+                n = null;
+            } while (c.moveToNext());
+        } else {
+            return  null;
+        }
+        c.close(); // close the cursor
+        sql.close();
+        return notifications;
     }
 
     public  boolean delete(String notifID){

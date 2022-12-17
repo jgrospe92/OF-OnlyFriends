@@ -3,13 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_orange"
     tools:context=".NotificationFragmet">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/textViewNoNotif"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You have no notification"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:textColor="@color/dark_orange"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/notificationRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="This is Notification" />
+        android:layout_height="match_parent" />
 
 </FrameLayout>

@@ -59,7 +59,7 @@ public class home extends AppCompatActivity {
 
     homefragment homefragment;
     searchFragment searchFragment = new searchFragment();
-    NotificationFragmet notificationFragmet = new NotificationFragmet();
+    NotificationFragmet notificationFragmet;
     InboxFragment inboxFragment = new InboxFragment();
 
     Profile profileHelper;
@@ -86,7 +86,6 @@ public class home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         userHelper = new User(this);
         profileHelper = new Profile(this);
-//        welcomeText = findViewById(R.id.welcomeText);
         // SHARED PREFERENCES
         userData = getSharedPreferences("user", MODE_PRIVATE);
         // HIDE NO POST WARNING
@@ -150,6 +149,8 @@ public class home extends AppCompatActivity {
         profileImage = findViewById(R.id.profileImage);
         loadImage(currentProfile.getImageLink(), this, profileImage);
         initProfile(currentProfile);
+        // Initialize notification
+        notificationFragmet = new NotificationFragmet(currentProfile);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.parentFragment, homefragment).commit();
 
@@ -166,8 +167,8 @@ public class home extends AppCompatActivity {
                     break;
 
                 case R.id.notif:
+                    noPostTextView.setVisibility(View.GONE);
                     getSupportFragmentManager().beginTransaction().replace(R.id.parentFragment, notificationFragmet).commit();
-                    Toast.makeText(getApplicationContext(), "notif click", Toast.LENGTH_SHORT).show();
                     break;
 
                 case R.id.inbox:

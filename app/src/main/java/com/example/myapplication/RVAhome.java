@@ -168,6 +168,7 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
         holder.imgView_saved.setOnClickListener(view -> {
             Post post = postHelper.get(postid);
             Notification notification = new Notification();
+
             if (notifHelper.checkIfAlreadySaved(currentProfile.getProfileID(), "saved")) {
                 // IF POST IS ALREADY SAVED, UNSAVED IT.
                 Post p = postHelper.get(postsData.get(position).getPostID());

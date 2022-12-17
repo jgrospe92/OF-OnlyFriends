@@ -24,6 +24,8 @@ public class RVAnotification extends RecyclerView.Adapter<RVAnotification.ViewHo
 
     ArrayList<Notification> notifications;
     private LayoutInflater mInflater;
+    private ItemClickListener mClickListener;
+
 
     public RVAnotification(Context context, ArrayList<Notification> notifications) {
         this.notifications = notifications;
@@ -39,13 +41,14 @@ public class RVAnotification extends RecyclerView.Adapter<RVAnotification.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-
         Profile profile = new Profile(mInflater.getContext());
-        profile = profile.getProfileByID(notifications.get(position).getProfileID());
+        // Profile of the user  who like or saved your post
+        profile = profile.getProfileByID(notifications.get(position).getCurrentProfileId());
 
 
         if (getItemCount() >= 0) {
             // LOAD PROFILE IMAGE
+
             GlideUrl profileImage = new GlideUrl(profile.getImageLink(), new LazyHeaders.Builder()
                     .addHeader("User-Agent", "profileImage")
                     .build());
@@ -59,8 +62,12 @@ public class RVAnotification extends RecyclerView.Adapter<RVAnotification.ViewHo
                     .centerCrop()
                     .into(holder.profileCircleImageNotif);
 
-            holder.messageNotif.setText("liked your post");
-            holder.firstNameTextView.setText(profile.getFname());
+            String profileName = profile.getProfileName();
+            String userAction = notifications.get(position).getDescription();
+            holder.firstNameTextView.setText(profileName);
+            String message = userAction + " post";
+            holder.messageNotif.setText(message);
+
         }
     }
 
@@ -71,6 +78,7 @@ public class RVAnotification extends RecyclerView.Adapter<RVAnotification.ViewHo
         }
         return  -1;
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener {
 
@@ -83,13 +91,25 @@ public class RVAnotification extends RecyclerView.Adapter<RVAnotification.ViewHo
             profileCircleImageNotif = itemView.findViewById(R.id.profileCircleImageNotif);
             firstNameTextView = itemView.findViewById(R.id.firstNameTextView);
             messageNotif = itemView.findViewById(R.id.messageNotif);
-
+            itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-
-
+            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
         }
+    }
+
+    // convenience method for getting data at click position
+    public Notification getItem(int id) {
+        return notifications.get(id);
+    }
+    // allows clicks events to be caught
+    public void setClickListener(ItemClickListener itemClickListener) {
+        this.mClickListener = itemClickListener;
+    }
+    // parent activity will implement this method to respond to click events
+    public interface ItemClickListener {
+        void onItemClick(View view, int position);
     }
 }
