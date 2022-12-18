@@ -23,9 +23,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RVAcomment extends  RecyclerView.Adapter<RVAcomment.VIewHolder>{
 
-    ArrayList<Comment> comments;
+    ArrayList<Comment> comments; //ArrayList that will contains comments
     private LayoutInflater mInflater;
 
+    //Constructor
     public RVAcomment(Context context, ArrayList<Comment> comments) {
         this.comments = comments;
         this.mInflater =  LayoutInflater.from(context);
@@ -34,12 +35,14 @@ public class RVAcomment extends  RecyclerView.Adapter<RVAcomment.VIewHolder>{
     @NonNull
     @Override
     public VIewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        //initialize or displays the comment layout.
         View view = mInflater.inflate(R.layout.comment_layout, parent, false);
         return new VIewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull VIewHolder holder, int position) {
+        //
         Profile profile = new Profile(mInflater.getContext());
 
         if(getItemCount() >= 0){

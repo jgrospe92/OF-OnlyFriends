@@ -33,13 +33,13 @@ public class dbConnector extends SQLiteOpenHelper {
         db.execSQL("create table user (userID integer primary key autoincrement, username varchar UNIQUE, password varchar, email varchar)");
 //      PROFILE TABLE
         db.execSQL("create table profile (profileID integer primary key autoincrement, profileName varchar, fname varchar, lname varchar, isFollowed integer, isSubscribed integer, wallet varchar, imageLink varchar, userID integer, foreign key (userID) references user (userID) on delete cascade)");
-//      FOLLOWER TABLE
+//      FOLLOWER TABLE current user
         db.execSQL("create table follower (followerID integer primary key autoincrement, dateFollowed text, profileID integer , foreign key (profileID) references profile (profileID) on delete cascade )");
-//      SUBSCRIBER TABLE
+//      SUBSCRIBER TABLE current user
         db.execSQL("create table subscriber (subscriberID integer primary key autoincrement, dateSubscribed text, profileID integer , foreign key (profileID) references profile (profileID) on delete cascade )");
-//      FOLLOWING TABLE
+//      FOLLOWING TABLE someone other user
         db.execSQL("create table following (followingID integer primary key autoincrement, dateAdded text, profileID integer , foreign key (profileID) references profile (profileID) on delete cascade )");
-//      SUBSCRIBED TABLE
+//      SUBSCRIBED TABLE someone other user
         db.execSQL("create table subscribed (followingID integer primary key autoincrement, dateAdded text, profileID integer , foreign key (profileID) references profile (profileID) on delete cascade )");
 //      POST TABLE
         db.execSQL("create table post (postID integer primary key autoincrement, caption text, datePosted text, likes integer , favorites integer , imageURL varchar, profileID integer, foreign key (profileID) references profile (profileID) on delete cascade)");

@@ -158,6 +158,31 @@ public class Post extends Observable {
         return posts;
     }
 
+    // GET ALL POST
+    public ArrayList<Post> getCurrentUserPosts(String currentProfileID) {
+        SQLiteDatabase sql = con.getWritableDatabase();
+        ArrayList<Post> posts = new ArrayList<>();
+        // opens a cursor
+        Cursor c = sql.rawQuery("SELECT * FROM  post WHERE profileID=?  ORDER by postID desc", new String[]{currentProfileID});
+        if (c.moveToFirst()) {
+            do {
+                Post p = new Post();
+                p.setPostID(c.getString(0)); // postID
+                p.setCaption(c.getString(1)); // captionID
+                p.setDatePosted(c.getString(2)); // datePosted
+                p.setLikes(c.getInt(3)); // likes
+                p.setFavorites(c.getInt(4)); // favorites
+                p.setImageURL(c.getString(5)); // imageURL
+                p.setProfileID(c.getString(6));
+                posts.add(p);
+            } while (c.moveToNext());
+        }
+        c.close(); // close the cursor
+        sql.close();
+        return posts;
+    }
+
+
     // SEARCH POST BY KEYWORD(s); returns an arrayList of type Post
     public ArrayList<Post> searchByKeyWord(String word) {
         SQLiteDatabase sql = con.getWritableDatabase();
