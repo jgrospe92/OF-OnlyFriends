@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Toast;
 
 import com.example.models.Comment;
 import com.example.models.Post;
@@ -35,9 +36,22 @@ public class postfragment extends Fragment implements RVApost.ItemClickListener 
     View view;
     SharedPreferences userData;
     Profile currentProfileID;
-
+    private static String userID;
     public postfragment(){
 
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    //create another constructor that has other userID in it.
+    public postfragment(String newUserID){
+        this.userID = newUserID;
     }
 
     @Override
@@ -47,16 +61,29 @@ public class postfragment extends Fragment implements RVApost.ItemClickListener 
         // SHARED PREFERENCES
         userData = this.getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
         view = inflater.inflate(R.layout.fragment_postfragment, container, false);
+
         ArrayList<Post> posts = new ArrayList<>();
         User userHelper = new User(view.getContext());
-        User user = userHelper.get(userData.getString("userID",""));
-         Profile profileHelper = new Profile(view.getContext());
+        Profile profileHelper = new Profile(view.getContext());
         Post postHelper = new Post(view.getContext());
+        User user = userHelper.get(userData.getString("userID",""));
+
+        currentProfileID = profileHelper.get(userID);
+       // if(currentProfileID.get(user.getUserID()).getUserID() != userID){
+        //    currentProfileID = profileHelper.get(userID);
+       // }else{
+      //      currentProfileID = profileHelper.get(user.getUserID());
+       // }
+        Toast.makeText(view.getContext(), userID, Toast.LENGTH_SHORT).show();
+       // else{
+
+        //}
+
 
         /**
          * TODO: Change getAllPosts to display posts from currentPoser Done
          */
-        currentProfileID = profileHelper.get(user.getUserID());
+
         posts = postHelper.getCurrentUserPosts(currentProfileID.getProfileID());
         postRecyclerView = view.findViewById(R.id.postRecyclerView);
         postRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));

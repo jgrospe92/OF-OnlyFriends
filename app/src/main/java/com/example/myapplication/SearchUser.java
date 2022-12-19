@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -61,9 +63,13 @@ public class SearchUser extends AppCompatActivity {
         userHelper = new User(this);
         profileList = new ArrayList<>();
 
+        SharedPreferences currentUserData = getSharedPreferences("user", Context.MODE_PRIVATE);
+        User user = userHelper.get(currentUserData.getString("userID",""));
         //Getting the user's name and current image
         currUserName = getIntent().getStringExtra("USERNAME");
-        userCurrID = userHelper.getUserByUsername(currUserName).getUserID();
+        userCurrID = userHelper.getUserByUsername(user.getUsername()).getUserID();
+        // get the current userID
+
 
 
         searchFname.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

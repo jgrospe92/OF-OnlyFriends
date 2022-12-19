@@ -3,6 +3,7 @@ package com.example.models;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -98,6 +99,7 @@ public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.MyViewHo
                     //Toast.makeText(mContext, userID, Toast.LENGTH_SHORT).show();
                 }else{
                     i = new Intent(mContext, OtherProfilePage.class);
+
                     i.putExtra("userID", userID);
                 }
                 mContext.startActivity(i);
