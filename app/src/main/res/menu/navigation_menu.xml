@@ -23,7 +23,7 @@
         android:id="@+id/nav_saved"
         android:icon="@drawable/ic_baseline_bookmark_24"
         android:iconTint="@color/dark_orange"
-        android:title="Savced"/>
+        android:title="Saved"/>
 
     <item
         android:id="@+id/nav_credit"

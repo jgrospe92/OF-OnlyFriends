@@ -113,11 +113,13 @@ public class home extends AppCompatActivity {
                     case R.id.nav_likes:
                         Toast.makeText(getApplicationContext(), "likes clicked", Toast.LENGTH_SHORT).show();break;
                     case  R.id.nav_secrets:
+                        // THIS FEATURE IS CURRENTLY DISABLED
                         Toast.makeText(getApplicationContext(), "Secrets clicked", Toast.LENGTH_SHORT).show();break;
                     case R.id.nav_saved:
                         Toast.makeText(getApplicationContext(), "Saved Post clicked", Toast.LENGTH_SHORT).show();break;
                     case R.id.nav_credit:
-                        Toast.makeText(getApplicationContext(), "Credit  clicked", Toast.LENGTH_SHORT).show();break;
+                        switchActivity(Wallet.class);
+                        break;
                     case R.id.nav_settings:
                         Toast.makeText(getApplicationContext(), "Settings  clicked", Toast.LENGTH_SHORT).show();break;
                     case R.id.nav_help:
@@ -172,6 +174,7 @@ public class home extends AppCompatActivity {
                     break;
 
                 case R.id.inbox:
+                    // CURRENT DISABLED
                     getSupportFragmentManager().beginTransaction().replace(R.id.parentFragment, inboxFragment).commit();
                     Toast.makeText(getApplicationContext(), "inbox click", Toast.LENGTH_SHORT).show();
                     break;
