@@ -121,7 +121,8 @@ public class home extends AppCompatActivity {
                         switchActivity(Wallet.class);
                         break;
                     case R.id.nav_settings:
-                        Toast.makeText(getApplicationContext(), "Settings  clicked", Toast.LENGTH_SHORT).show();break;
+                        switchActivity(Settings.class);
+                        break;
                     case R.id.nav_help:
                         switchActivity(Helpmenu.class);
                         break;
@@ -186,6 +187,8 @@ public class home extends AppCompatActivity {
         // DRAWER listener
     }
 
+    @Override
+    public void onBackPressed() { }
     @Override
     protected void onResume() {
         super.onResume();

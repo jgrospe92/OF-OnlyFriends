@@ -64,6 +64,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    @Override
+    public void onBackPressed() { }
+
     // ON RESUME CLEAR INPUTS
     @Override
     protected void onResume() {
