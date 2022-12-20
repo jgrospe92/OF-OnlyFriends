@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".profilePage">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profileImg"
+        android:layout_width="69dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/account"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/editProfileImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="108dp"
+        android:layout_marginEnd="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/profileImg"
+        app:layout_constraintTop_toTopOf="parent"
+        android:onClick="editProfile"
+        app:srcCompat="@drawable/editprofilebutton" />
+
+    <TextView
+        android:id="@+id/boldFName"
+        android:layout_width="95dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:text="FNAME"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileImg" />
+
+    <TextView
+        android:id="@+id/profileNameTag"
+        android:layout_width="109dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="36dp"
+        android:text="ProfileNameTag"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/boldFName" />
+
+    <TextView
+        android:id="@+id/profileDescriptionTextView"
+        android:layout_width="342dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileNameTag" />
+
+    <ImageView
+        android:id="@+id/linkIconImageView"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileDescriptionTextView"
+        app:srcCompat="@drawable/linkicon" />
+
+    <TextView
+        android:id="@+id/linkTextView"
+        android:layout_width="62dp"
+        android:layout_height="17dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="12dp"
+        android:text="link"
+        app:layout_constraintStart_toEndOf="@+id/linkIconImageView"
+        app:layout_constraintTop_toBottomOf="@+id/profileDescriptionTextView" />
+
+    <ImageView
+        android:id="@+id/calendarIconImageView"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toEndOf="@+id/linkTextView"
+        app:layout_constraintTop_toBottomOf="@+id/profileDescriptionTextView"
+        app:srcCompat="@drawable/calendaricon" />
+
+    <TextView
+        android:id="@+id/joinedDateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="12dp"
+        android:text="Joined Date Text View"
+        app:layout_constraintStart_toEndOf="@+id/calendarIconImageView"
+        app:layout_constraintTop_toBottomOf="@+id/profileDescriptionTextView" />
+
+    <TextView
+        android:id="@+id/followingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="16dp"
+        android:text="Following"
+        app:layout_constraintStart_toEndOf="@+id/followingCountTextView"
+        app:layout_constraintTop_toBottomOf="@+id/linkTextView" />
+
+    <TextView
+        android:id="@+id/followingCountTextView"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:text="0"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linkIconImageView" />
+
+    <TextView
+        android:id="@+id/followerCountTextView"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="20dp"
+        android:text="0"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/followingTextView"
+        app:layout_constraintTop_toBottomOf="@+id/calendarIconImageView" />
+
+    <TextView
+        android:id="@+id/followersTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="15dp"
+        android:text="Followers"
+        app:layout_constraintStart_toEndOf="@+id/followerCountTextView"
+        app:layout_constraintTop_toBottomOf="@+id/joinedDateTextView" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/profilePostRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="375dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/followersTextView" />
+
+    <Button
+        android:id="@+id/searchButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="52dp"
+        android:text="Search"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".register">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        app:srcCompat="@drawable/only_fans_logo" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="20dp"
+        android:text="Username"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/et_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/layout_bg"
+        android:drawableStart="@drawable/ic_baseline_person_outline_24"
+        android:drawablePadding="10dp"
+        android:padding="10dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_marginBottom="15dp"
+        android:hint="Enter Username" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/et_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/layout_bg"
+        android:drawableStart="@drawable/ic_baseline_email_24"
+        android:drawablePadding="10dp"
+        android:padding="10dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:layout_marginBottom="15dp"
+        android:hint="Enter Email address" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/layout_bg"
+        android:drawableStart="@drawable/ic_baseline_lock_open_24"
+        android:drawablePadding="10dp"
+        android:padding="10dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:layout_marginBottom="15dp"
+        android:hint="Enter Password" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Confirm Password"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/et_confirmPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/layout_bg"
+        android:drawableStart="@drawable/ic_baseline_lock_open_24"
+        android:drawablePadding="10dp"
+        android:padding="10dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:layout_marginBottom="15dp"
+        android:hint="Confirm Password" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_save"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/layout_blue_btn"
+        android:onClick="saveUser"
+        android:text="SAVE" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_cancel"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/layout_orange_btn"
+        android:onClick="cancelUser"
+        android:text="CANCEL" />
+</LinearLayout>

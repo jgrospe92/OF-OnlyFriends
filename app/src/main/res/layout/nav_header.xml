@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/navHeader"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/navFname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:text="First Name"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/navProfileName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/navFname"
+        android:layout_marginStart="16dp"
+        android:text="\@profile name"
+        android:textColor="@color/muted_blue" />
+
+    <TextView
+        android:id="@+id/following"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/navProfileName"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@id/followingNum"
+        android:textColor="@color/muted_blue"
+        android:text="following" />
+
+    <TextView
+        android:id="@+id/subscribedNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/followingNum"
+        android:textStyle="bold"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="15dp"
+        android:text="1000"
+        />
+
+    <TextView
+        android:id="@+id/subscriberNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/followingNum"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@id/following"
+        android:text="3000"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/subsciber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/follower"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@id/followerNum"
+        android:textColor="@color/muted_blue"
+        android:text="Followig" />
+
+    <!-- SUBSCRIBER   -->
+
+    <TextView
+        android:id="@+id/subscribed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/following"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@id/followingNum"
+        android:textColor="@color/muted_blue"
+        android:text="Subscribed" />
+
+    <TextView
+        android:id="@+id/followingNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/navProfileName"
+        android:textStyle="bold"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="15dp"
+        android:text="1000"
+        />
+
+    <TextView
+        android:id="@+id/followerNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/navProfileName"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@id/following"
+        android:text="2500"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/follower"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/navProfileName"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@id/followerNum"
+        android:textColor="@color/muted_blue"
+        android:text="Followers" />
+
+</RelativeLayout>
