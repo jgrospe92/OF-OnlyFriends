@@ -10,6 +10,7 @@
 
     <item
         android:id="@+id/nav_likes"
+        android:visible="false"
         android:icon="@drawable/ic_baseline_favorite_border_24"
         android:title="Likes" />
 
@@ -21,6 +22,7 @@
 
     <item
         android:id="@+id/nav_saved"
+        android:visible="false"
         android:icon="@drawable/ic_baseline_bookmark_24"
         android:iconTint="@color/dark_orange"
         android:title="Saved"/>
