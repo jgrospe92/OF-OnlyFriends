@@ -1,34 +1,48 @@
 # OF-OnlyFriends-app
 - A group Project for our mobile application development 2 course
 
- # Description
-- OnlyFriends is a social media platform similar to twitter and onlyFans. Our platform is mainly inspired by OF but instead of posting only explicit content, users posts tutorials, documentations and blogs. The reason why we call it only friends is because a user cannot see another user content without subscribing. This platform encourages creativity and uniqueness.
+# Project Goal
+Our goal is to create a social media platform that allows users to share tutorials, documentations, and blogs with their subscribers and followers. The platform will encourage creativity and uniqueness, and will differentiate itself from competitors by not allowing the posting of explicit content. We want to encourage real talent. The platform will be designed to foster a sense of community and connection among users. A user can support their favorite content creator by subscribing.
+
+# Description
+OnlyFriends is a social media platform that allows users to share tutorials, documentations, and blogs with their followers, similar to Twitter. While inspired by OnlyFans, our platform differs in that it does not allow the posting of explicit content. Instead, we encourage creativity and uniqueness among our users. With the same functionality as Twitter, users can easily follow and connect with one another on our platform.
 
 
-# Features
-1. As a user, I can register and create my profile
-2. As a user, I can edit my profile and change my profile image
-3. As a user, I can login using my credentials
-4. As a user, I can logout
-5. As a user, I can upload my profile Image
-6. As a user, I can publish a post with just the caption
-7. As a user, I can publish a post with an image
-8. As a user, I can delete my post
-9. As a user, I can like a post
-10. As a user, I can saved a post
-11. As a user, I can comment on a post
-12. As a user, I get notified when someone like or save my post
-13. As a user, I can delete notifications
-14. As a user, I can check the help menu
-15. As a user, I can set up my virtual wallet
-16. As a user. I can reload my virtual wallet
-17. As a user, I can see all post
-18. As a user, I can see my profile
-19. As a user, I can see other user's profile
+# Functional Features
+1. Profile Creation
+2. User login
+3. User logout
+4. Set up Virtual wallet
+5. Reload Virtual Wallet
+6. Add profile image using API calls
+7. The ability to see your own profile
+8. Edit Profile
+9. Ability Post text message
+10. Ability Post text message with image
+11. Delete your Post
+12. See other users Post
+13. Ability to comment to a post
+14. Like a post
+15. Save/Bookmark a post
+16. Search for other users by Profile name
+17. Search for other users by First name
+18. Ability to get notified when someone like my post
+19. Ability to get notified when someone saved my post
+20. Ability to deactivate my account (Delete permanently)
+21. Help menu
+22. Input validations
+23. Robustness
 
-# Prototype
-<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2F0kHZgciBbsmmPLLUBjlSNJ%2FAppDev-2-Project%3Fnode-id%3D106%253A254%26scaling%3Dmin-zoom%26page-id%3D0%253A1%26starting-point-node-id%3D106%253A254%26show-proto-sidebar%3D1" allowfullscreen></iframe>
 
+# Non Functional Feature
+1. Follow a user
+2. Subscribe to a user
+3. Visit other user profile
+4. View Like post list
+5. View Saved/bookmarked post list
+
+# Live Demo
+- Soon
 
 # Team Members
 - Grospe, Jeffrey Juan
