@@ -10,13 +10,13 @@
 
     <item
         android:id="@+id/nav_likes"
-        android:visible="false"
+        android:visible="true"
         android:icon="@drawable/ic_baseline_favorite_border_24"
         android:title="Likes" />
 
     <item
         android:id="@+id/nav_secrets"
-        android:visible="false"
+        android:visible="true"
         android:icon="@drawable/ic_baseline_insert_emoticon_24"
         android:title="Secret" />
 
