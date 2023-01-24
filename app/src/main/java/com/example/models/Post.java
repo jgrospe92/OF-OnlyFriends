@@ -254,5 +254,24 @@ public class Post extends Observable {
         return false;
     }
 
+    // Method to check if post exists
+    public boolean checkIfPostExists(String postID){
+        SQLiteDatabase sql = con.getWritableDatabase();
+        try {
+            Cursor c = sql.rawQuery("SELECT * FROM post WHERE postID = ?", new String[]{postID});
+            if (c.moveToFirst()){
+                c.close();
+                return true;
+            }
+            else {
+                c.close();
+                return false;
+            }
+        } catch (Exception e){
 
+        } finally {
+            sql.close();
+        }
+        return false;
+    }
 }

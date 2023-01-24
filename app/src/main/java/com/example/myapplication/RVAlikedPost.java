@@ -96,7 +96,10 @@ public class RVAlikedPost extends  RecyclerView.Adapter<RVAlikedPost.ViewHolder>
 
     @Override
     public int getItemCount() {
-        return postsData.size();
+        if (postsData != null){
+            return postsData.size();
+        }
+        return  -1;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

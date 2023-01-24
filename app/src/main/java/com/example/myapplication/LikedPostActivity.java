@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.models.Notification;
 import com.example.models.Post;
@@ -25,6 +26,7 @@ public class LikedPostActivity extends AppCompatActivity {
     ImageView backBtnImage;
     RecyclerView likePostRecyclerView;
     RVAlikedPost likePostAdapter;
+    TextView tv_warning;
     Profile profile;
     SharedPreferences userData;
 
@@ -36,6 +38,7 @@ public class LikedPostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_liked_post);
         Notification notificationHelper = new Notification(getApplicationContext());
+        tv_warning = findViewById(R.id.tv_warning);
 
         userData = getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
         profile = new Profile(getApplicationContext());
@@ -51,6 +54,8 @@ public class LikedPostActivity extends AppCompatActivity {
 
         postIDs = notificationHelper.getLikePostsID(profile.getProfileID());
         loadPost();
+        checkForLikedPost();
+        Log.e("Post size", "" + postIDs.size());
 
         likePostRecyclerView = findViewById(R.id.likePostRecyclerView);
         likePostRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -69,8 +74,20 @@ public class LikedPostActivity extends AppCompatActivity {
         Post postHelper = new Post(getApplicationContext());
         for(String postID : postIDs)
         {
-            Post post = postHelper.get(postID);
-            likePostsData.add(post);
+            if(postHelper.checkIfPostExists(postID)){
+                Post post = postHelper.get(postID);
+                likePostsData.add(post);
+                Log.e("loadPost", "inner, ID = " + postID);
+            }
+            Log.e("loadPost", "outside, ID = " + postID);
+        }
+    }
+    private void checkForLikedPost()
+    {
+        if (likePostsData.size() == 0){
+            tv_warning.setVisibility(View.VISIBLE);
+        } else {
+            tv_warning.setVisibility(View.GONE);
         }
     }
 }
