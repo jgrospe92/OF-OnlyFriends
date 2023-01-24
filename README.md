@@ -32,14 +32,17 @@ OnlyFriends is a social media platform that allows users to share tutorials, doc
 21. Help menu
 22. Input validations
 23. Robustness
+24. View Like post list****
 
 
 # Non Functional Feature
 1. Follow a user
 2. Subscribe to a user
 3. Visit other user profile
-4. View Like post list
-5. View Saved/bookmarked post list
+4. View Saved/bookmarked post list
+
+# Known Bugs
+1. Like counter reaches -1 when switching between liked post UI and Home Ui then spamming the like button makes it go to -1
 
 # Live Demo
 - Soon
