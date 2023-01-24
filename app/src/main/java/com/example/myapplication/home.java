@@ -111,8 +111,7 @@ public class home extends AppCompatActivity {
                         switchActivity(UserProfile.class);
                         break;
                     case R.id.nav_likes:
-                        switchActivity(LikedPostActivity.class);
-                        Toast.makeText(getApplicationContext(), "likes clicked", Toast.LENGTH_SHORT).show();break;
+                        switchActivity(LikedPostActivity.class);break;
                     case  R.id.nav_secrets:
 
                         Toast.makeText(getApplicationContext(), "Secrets clicked", Toast.LENGTH_SHORT).show();break;
