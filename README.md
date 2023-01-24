@@ -32,7 +32,7 @@ OnlyFriends is a social media platform that allows users to share tutorials, doc
 21. Help menu
 22. Input validations
 23. Robustness
-24. View Like post list****
+24. View Like post list
 
 
 # Non Functional Feature
