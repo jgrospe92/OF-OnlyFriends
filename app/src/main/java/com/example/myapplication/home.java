@@ -113,8 +113,8 @@ public class home extends AppCompatActivity {
 
                         Toast.makeText(getApplicationContext(), "Secrets clicked", Toast.LENGTH_SHORT).show();break;
                     case R.id.nav_saved:
-
-                        Toast.makeText(getApplicationContext(), "Saved Post clicked", Toast.LENGTH_SHORT).show();break;
+                        switchActivity(SavedPostActivity.class);
+                        break;
                     case R.id.nav_credit:
                         switchActivity(Wallet.class);
                         break;

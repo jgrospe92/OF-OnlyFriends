@@ -193,11 +193,11 @@ public class Notification {
     }
 
     // GET All Like Post
-    public ArrayList<String> getLikePostsID(String id) {
+    public ArrayList<String> getLikeOrSavedPostsID(String id, String desc) {
         SQLiteDatabase sql = con.getWritableDatabase();
         ArrayList<String> postsID = new ArrayList<>();
         // opens a cursor
-        Cursor c = sql.rawQuery("SELECT * FROM Notification WHERE currentProfileId = ?", new String[]{id});
+        Cursor c = sql.rawQuery("SELECT * FROM Notification WHERE currentProfileId = ? AND description = ?", new String[]{id, desc});
         if (c.moveToFirst()) {
             do {
                 postsID.add(c.getString(c.getColumnIndexOrThrow("postID")));
