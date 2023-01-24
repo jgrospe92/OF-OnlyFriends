@@ -111,14 +111,13 @@ public class home extends AppCompatActivity {
                         switchActivity(UserProfile.class);
                         break;
                     case R.id.nav_likes:
-                        // CURRENTLY DISABLED
-                        //Toast.makeText(getApplicationContext(), "likes clicked", Toast.LENGTH_SHORT).show();break;
+                        switchActivity(LikedPostActivity.class);break;
                     case  R.id.nav_secrets:
-                        // THIS FEATURE IS CURRENTLY DISABLED
-                        //Toast.makeText(getApplicationContext(), "Secrets clicked", Toast.LENGTH_SHORT).show();break;
+
+                        Toast.makeText(getApplicationContext(), "Secrets clicked", Toast.LENGTH_SHORT).show();break;
                     case R.id.nav_saved:
-                        // CURRENTLY DISABLED
-                        //Toast.makeText(getApplicationContext(), "Saved Post clicked", Toast.LENGTH_SHORT).show();break;
+
+                        Toast.makeText(getApplicationContext(), "Saved Post clicked", Toast.LENGTH_SHORT).show();break;
                     case R.id.nav_credit:
                         switchActivity(Wallet.class);
                         break;
