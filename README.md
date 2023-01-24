@@ -32,14 +32,15 @@ OnlyFriends is a social media platform that allows users to share tutorials, doc
 21. Help menu
 22. Input validations
 23. Robustness
+24. View Liked Post
+25. View Saved/bookmarked post
 
 
 # Non Functional Feature
 1. Follow a user
 2. Subscribe to a user
 3. Visit other user profile
-4. View Like post list
-5. View Saved/bookmarked post list
+
 
 # Live Demo
 - Soon
