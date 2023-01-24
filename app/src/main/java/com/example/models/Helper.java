@@ -22,6 +22,13 @@ public class Helper {
         return false;
     }
 
+    public static boolean isEditTextEmpty(EditText editText){
+        if (TextUtils.isEmpty(editText.getText().toString())){
+            return  true;
+        }
+        return false;
+    }
+
     public static boolean checkInputImage(EditText editText){
         if (!TextUtils.isEmpty(editText.getText().toString())){
             return  true;

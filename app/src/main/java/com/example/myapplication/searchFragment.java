@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +31,7 @@ public class searchFragment extends Fragment {
     RecyclerView searchRecycleView;
     Button btn_search;
     View view;
+    RVAsearch searchAdapter;
 
     public searchFragment() {
         // Required empty public constructor
@@ -47,6 +50,27 @@ public class searchFragment extends Fragment {
         textViewNoResultFound = view.findViewById(R.id.textViewNoResultFound);
         textViewNoResultFound.setVisibility(View.GONE);
         searchEditText.setText("");
+
+        searchEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(Helper.isEditTextEmpty(searchEditText)){
+                    if (profiles != null){
+                        profiles.clear();
+                        searchAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {Toast.makeText(getContext(), "after text changed", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         btn_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,7 +84,7 @@ public class searchFragment extends Fragment {
                         textViewNoResultFound.setVisibility(View.GONE);
                     }
                     searchRecycleView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-                    RVAsearch searchAdapter = new RVAsearch(view.getContext(), profiles);
+                    searchAdapter = new RVAsearch(view.getContext(), profiles);
                     searchRecycleView.addItemDecoration(new DividerItemDecoration(view.getContext(),
                             DividerItemDecoration.VERTICAL));
                     searchRecycleView.setAdapter(searchAdapter);
@@ -69,7 +93,6 @@ public class searchFragment extends Fragment {
                 }
             }
         });
-
         return view;
     }
 

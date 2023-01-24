@@ -1,20 +1,12 @@
 package com.example.myapplication;
 
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +18,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.model.GlideUrl;
@@ -36,7 +34,6 @@ import com.example.models.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -111,14 +108,13 @@ public class home extends AppCompatActivity {
                         switchActivity(UserProfile.class);
                         break;
                     case R.id.nav_likes:
-                        // CURRENTLY DISABLED
-                        //Toast.makeText(getApplicationContext(), "likes clicked", Toast.LENGTH_SHORT).show();break;
+                        switchActivity(LikedPostActivity.class);break;
                     case  R.id.nav_secrets:
-                        // THIS FEATURE IS CURRENTLY DISABLED
-                        //Toast.makeText(getApplicationContext(), "Secrets clicked", Toast.LENGTH_SHORT).show();break;
+
+                        Toast.makeText(getApplicationContext(), "Secrets clicked", Toast.LENGTH_SHORT).show();break;
                     case R.id.nav_saved:
-                        // CURRENTLY DISABLED
-                        //Toast.makeText(getApplicationContext(), "Saved Post clicked", Toast.LENGTH_SHORT).show();break;
+
+                        Toast.makeText(getApplicationContext(), "Saved Post clicked", Toast.LENGTH_SHORT).show();break;
                     case R.id.nav_credit:
                         switchActivity(Wallet.class);
                         break;
