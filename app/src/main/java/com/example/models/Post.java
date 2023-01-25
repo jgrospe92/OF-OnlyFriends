@@ -7,6 +7,7 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -273,5 +274,30 @@ public class Post extends Observable {
             sql.close();
         }
         return false;
+    }
+
+    // Get all posts by user ID
+    public ArrayList<Post> getAllPostByProfileId(String id)
+    {
+        SQLiteDatabase sql = con.getWritableDatabase();
+        ArrayList<Post> posts = new ArrayList<>();
+        // opens a cursor
+        Cursor c = sql.rawQuery("SELECT * FROM post WHERE profileID = ? ORDER by postID desc", new String[]{id});
+        if (c.moveToFirst()) {
+            do {
+                Post p = new Post();
+                p.setPostID(c.getString(0)); // postID
+                p.setCaption(c.getString(1)); // captionID
+                p.setDatePosted(c.getString(2)); // datePosted
+                p.setLikes(c.getInt(3)); // likes
+                p.setFavorites(c.getInt(4)); // favorites
+                p.setImageURL(c.getString(5)); // imageURL
+                p.setProfileID(c.getString(6));
+                posts.add(p);
+            } while (c.moveToNext());
+        }
+        c.close(); // close the cursor
+        sql.close();
+        return posts;
     }
 }
