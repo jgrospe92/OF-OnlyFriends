@@ -34,16 +34,24 @@ OnlyFriends is a social media platform that allows users to share tutorials, doc
 23. Robustness
 24. View Liked Post
 25. View Saved/bookmarked post
-
+26. Visit other user's profile
 
 # Non Functional Feature
 1. Follow a user
 2. Subscribe to a user
-3. Visit other user profile
 
+# Tested on
+- Pixel 5
 
 # Live Demo
 - Soon
+
+# Found a Bug?
+Please create an issue and will try out best to fix it.
+
+# Collaboration
+If you would like to contribute, feel to to clone this repo and make a pull request.
+Your help is greatly appreciated it.
 
 # Team Members
 - Grospe, Jeffrey Juan
