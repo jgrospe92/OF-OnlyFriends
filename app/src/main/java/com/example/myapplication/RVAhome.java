@@ -4,6 +4,7 @@ package com.example.myapplication;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.util.Log;
@@ -42,6 +43,8 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
     private LayoutInflater mInflater;
     private SharedPreferences sharedData;
     private ClickListener listener;
+
+    private Context context;
     Profile profile;
     Profile currentProfile;
 
@@ -58,6 +61,7 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
 
     public RVAhome(Context context, ArrayList<Post> postsData, SharedPreferences user, ClickListener listener) {
         this.listener = listener;
+        this.context = context;
         this.sharedData = user;
         this.postsData = postsData;
         this.mInflater = LayoutInflater.from(context);
@@ -196,6 +200,20 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
             showCommentDialog(postid, holder, position);
         });
 
+        // Click event when the a user profile  is clicked in the home view
+        holder.circleImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switchActivity(OtherUserProfile.class, "1");
+                Toast.makeText(view.getContext(), "Post profile ID : " + postsData.get(position).getProfileID(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    private void switchActivity(Class activityClass, String id){
+        Intent switchActivity = new Intent(mInflater.getContext(), activityClass);
+        context.startActivity(switchActivity);
     }
 
     public void updatePost(Post post){
