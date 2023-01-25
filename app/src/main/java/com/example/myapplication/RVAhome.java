@@ -204,8 +204,8 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
         holder.circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switchActivity(OtherUserProfile.class, "1");
-                Toast.makeText(view.getContext(), "Post profile ID : " + postsData.get(position).getProfileID(), Toast.LENGTH_SHORT).show();
+                switchActivity(OtherUserProfile.class, postsData.get(position).getProfileID());
+
             }
         });
 
@@ -213,6 +213,7 @@ public class RVAhome extends RecyclerView.Adapter<RVAhome.VIewHolder> {
 
     private void switchActivity(Class activityClass, String id){
         Intent switchActivity = new Intent(mInflater.getContext(), activityClass);
+        switchActivity.putExtra("PROFILE_ID", id);
         context.startActivity(switchActivity);
     }
 

@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/layout_orange_btn"
         android:onClick="btn_cancel"
@@ -116,7 +116,7 @@
 
     <TextView
         android:id="@+id/fullNameTextView"
-        android:layout_width="135dp"
+        android:layout_width="wrap_content"
         android:layout_height="32dp"
         android:layout_marginStart="29dp"
         android:layout_marginTop="20dp"
@@ -131,6 +131,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_edit"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -145,13 +146,13 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profileCircleImage"
-        android:layout_width="0dp"
-        android:layout_height="90dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="115dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="197dp"
         android:src="@drawable/account"
         app:layout_constraintEnd_toStartOf="@+id/btn_edit"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
@@ -203,5 +204,18 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+    <LinearLayout
+        android:layout_width="410dp"
+        android:layout_height="455dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/profile_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
