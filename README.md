@@ -2,10 +2,11 @@
 - A group Project for our mobile application development 2 course
 
 # Project Goal
-Our goal is to create a social media platform that allows users to share tutorials, documentations, and blogs with their subscribers and followers. The platform will encourage creativity and uniqueness, and will differentiate itself from competitors by not allowing the posting of explicit content. We want to encourage real talent. The platform will be designed to foster a sense of community and connection among users. A user can support their favorite content creator by subscribing.
+- Our goal is to create a social media platform that allows users to share tutorials, documentation, and blogs with their subscribers and followers. The platform will encourage creativity and uniqueness. The platform will be designed to foster a sense of community and connection among users. User can support their favourite content creator by subscribing and following. This project demonstrates our knowledge of android mobile development and showcases our expertise in design architecture, data structures and algorithms.
+- We use agile management methodologies to finish the project.
 
 # Description
-OnlyFriends is a social media platform that allows users to share tutorials, documentations, and blogs with their followers, similar to Twitter. While inspired by OnlyFans, our platform differs in that it does not allow the posting of explicit content. Instead, we encourage creativity and uniqueness among our users. With the same functionality as Twitter, users can easily follow and connect with one another on our platform.
+- OnlyFriends is a social media platform that allows users to share tutorials, documentations, and blogs with their followers, similar to Twitter. While inspired by OnlyFans, our platform differs in that it does not allow the posting of explicit content. Instead, we encourage creativity and uniqueness among our users. With the same functionality as Twitter, users can easily follow and connect with one another on our platform.
 
 
 # Functional Features
@@ -44,8 +45,8 @@ OnlyFriends is a social media platform that allows users to share tutorials, doc
 # Tested on
 - Pixel 5
 
-# Live Demo
-- Soon
+# Live Demo and User Guide
+- [User Guide](https://github.com/jgrospe92/OF-OnlyFriends/blob/main/User-Guide/guide.md)
 
 # Found a Bug?
 Please create an issue and will try out best to fix it.
