@@ -67,8 +67,7 @@ public class searchFragment extends Fragment {
                 }
             }
             @Override
-            public void afterTextChanged(Editable editable) {Toast.makeText(getContext(), "after text changed", Toast.LENGTH_SHORT).show();
-            }
+            public void afterTextChanged(Editable editable) {}
         });
 
         btn_search.setOnClickListener(new View.OnClickListener() {
