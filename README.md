@@ -39,6 +39,7 @@ OnlyFriends is a social media platform that allows users to share tutorials, doc
 # Non Functional Feature
 1. Follow a user
 2. Subscribe to a user
+3. Messaging
 
 # Tested on
 - Pixel 5
@@ -50,8 +51,8 @@ OnlyFriends is a social media platform that allows users to share tutorials, doc
 Please create an issue and will try out best to fix it.
 
 # Collaboration
-If you would like to contribute, feel to to clone this repo and make a pull request.
-Your help is greatly appreciated it.
+If you would like to contribute, feel free to to clone this repo and make a pull request.
+Your help is greatly appreciated.
 
 # Team Members
 - Grospe, Jeffrey Juan
