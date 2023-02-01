@@ -44,8 +44,8 @@ OnlyFriends is a social media platform that allows users to share tutorials, doc
 # Tested on
 - Pixel 5
 
-# Live Demo
-- Soon
+# Live Demo and User Guide
+- [User Guide](https://github.com/jgrospe92/OF-OnlyFriends/blob/main/User-Guide/guide.md)
 
 # Found a Bug?
 Please create an issue and will try out best to fix it.
