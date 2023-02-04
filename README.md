@@ -55,6 +55,10 @@ Please create an issue and will try out best to fix it.
 If you would like to contribute, feel free to to clone this repo and make a pull request.
 Your help is greatly appreciated.
 
+# Resources
+- For images [Unsplash](https://unsplash.com/)
+- For fake generated profiles [Random User](https://randomuser.me/photos)
+
 # Team Members
 - Grospe, Jeffrey Juan
 - Nguyen, Dinh Thien Phuc
